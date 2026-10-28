@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Webhook-platform — Mohannad Shafik</title>
+  <meta name="description" content="Casestudy: een webhook-platform dat gebeurtenissen ondertekend en met automatische herpogingen aflevert, inclusief dashboard. FastAPI, PostgreSQL, Redis, React.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- seo -->
+  <link rel="canonical" href="https://msportfolio.be/projecten/webhook-platform/">
+  <link rel="alternate" hreflang="nl" href="https://msportfolio.be/projecten/webhook-platform/">
+  <link rel="alternate" hreflang="en" href="https://msportfolio.be/en/projects/webhook-platform/">
+  <link rel="alternate" hreflang="x-default" href="https://msportfolio.be/projecten/webhook-platform/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mohannad Shafik">
+  <meta property="og:title" content="Webhook-platform — Mohannad Shafik">
+  <meta property="og:description" content="Casestudy: een webhook-platform dat gebeurtenissen ondertekend en met automatische herpogingen aflevert, inclusief dashboard. FastAPI, PostgreSQL, Redis, React.">
+  <meta property="og:url" content="https://msportfolio.be/projecten/webhook-platform/">
+  <meta property="og:locale" content="nl_BE">
+  <meta property="og:locale:alternate" content="en_GB">
+  <meta property="og:image" content="https://msportfolio.be/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:alt" content="Mohannad Shafik, Full-Stack Developer — AI &amp; Automation (portrait and name on a teal background)">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- /seo -->
+</head>
+<body>
+  <a class="skip" href="#inhoud">Naar de inhoud</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">Mohannad Shafik</a>
+      <nav class="site-nav" aria-label="Hoofdmenu">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/projecten/" aria-current="page">Projecten</a></li>
+          <li><a href="/hoe-ik-werk/">Hoe ik werk</a></li>
+          <li><a href="/cv/">CV</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li class="lang"><span aria-current="true">NL</span> | <a href="/en/projects/webhook-platform/" lang="en" hreflang="en" aria-label="EN: English version">EN</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inhoud">
+    <div class="page-head">
+      <div class="wrap">
+        <p class="crumbs"><a href="/projecten/">Projecten</a> / casestudy</p>
+        <h1>Webhook-platform</h1>
+        <p class="lede">Gebeurtenissen betrouwbaar afleveren bij servers die traag zijn of uitvallen.</p>
+        <p class="stack">Python · FastAPI · PostgreSQL · Redis · Docker · React 18 · TypeScript · TanStack Query</p>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="case">
+        <h2>Probleem</h2>
+        <div>
+          <p>Een applicatie die klanten van gebeurtenissen op de hoogte brengt (een bestelling is aangemaakt, een betaling mislukt) moet de servers van die klanten aanroepen. Die servers zijn soms traag, soms uit de lucht en soms fout geconfigureerd.</p>
+          <p>Als de applicatie zelf wacht op die aanroep, blokkeert ze de gebruiker. Als ze het niet opnieuw probeert, gaat de gebeurtenis verloren. En zonder logboek kan niemand later bewijzen wat er verstuurd is.</p>
+        </div>
+
+        <h2>Wat ik gebouwd heb</h2>
+        <div>
+          <ul>
+            <li>Een API: de applicatie stuurt één gebeurtenis en krijgt meteen antwoord <code>202 Accepted</code>.</li>
+            <li>Een achtergrondproces dat de gebeurtenis naar elk geregistreerd adres stuurt, ondertekend met HMAC-SHA256 en een tijdstempel, zodat de ontvanger de afzender kan controleren.</li>
+            <li>Automatische herpogingen na 1, 5 en 30 minuten. De status staat in PostgreSQL, dus een herstart verliest niets.</li>
+            <li>Een dashboard in React dat leveringen, mislukkingen en herpogingen toont, met een demo-modus die zonder server werkt.</li>
+            <li>Beveiliging: adressen naar interne netwerken worden geweigerd (SSRF-controle), API-sleutels worden gehasht opgeslagen en elke klant heeft een limiet van 100 gebeurtenissen per uur.</li>
+          </ul>
+        </div>
+
+        <h2>Hoe het werkt</h2>
+        <div>
+          <ol class="flow">
+            <li><strong>Gebeurtenis binnen</strong><small>POST /events, gevalideerd en bewaard in PostgreSQL</small></li>
+            <li><strong>Wachtrij</strong><small>Redis, de API antwoordt direct 202</small></li>
+            <li><strong>Levering</strong><small>achtergrondproces stuurt een ondertekende POST naar elk adres</small></li>
+            <li><strong>Resultaat bewaard</strong><small>geslaagd, of nieuwe poging gepland na 1, 5 of 30 minuten</small></li>
+            <li><strong>Dashboard</strong><small>toont elke poging met fout en tijdstip</small></li>
+          </ol>
+        </div>
+
+        <h2>Resultaat</h2>
+        <div>
+          <dl class="ledger">
+            <dt>Gemeten</dt>
+            <dd>Op een lokale opstelling met Docker: gebeurtenis verstuurd naar een ontvanger die de eerste poging liet mislukken. De tweede poging kwam na ongeveer 60 seconden aan en de levering stond daarna als geslaagd, met twee pogingen. 10 geautomatiseerde tests en CI groen.</dd>
+            <dt>Nog niet</dt>
+            <dd>Geen belastingstest, dus ik weet niet hoeveel gebeurtenissen per seconde dit aankan. Het achtergrondproces draait in dezelfde applicatie, niet als aparte dienst. De demo draait op gratis hosting, waardoor de eerste aanvraag een halve minuut kan duren.</dd>
+          </dl>
+          <div class="story">
+            <p><strong>Wat mijn eigen controle opleverde.</strong> Toen ik de installatie-instructie vanaf een verse kloon volgde, werkte die niet: de applicatie stopte bij het opstarten door een instelling, de container zocht de database op het verkeerde adres, 9 van de 10 tests faalden door een instelling van de testomgeving, en de CI draaide niet op de standaardbranch. Ik heb dat opgelost in een pull request en de instructie aangepast.</p>
+          </div>
+          <ul class="links">
+            <li><a href="https://github.com/Ms-8888/ms-webhook-api" rel="noopener noreferrer">Code: API ↗</a></li>
+            <li><a href="https://github.com/Ms-8888/ms-webhook-ui" rel="noopener noreferrer">Code: dashboard ↗</a></li>
+            <li><a href="https://ms-8888.github.io/ms-webhook-ui/" rel="noopener noreferrer">Dashboard (demo-modus) ↗</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 Mohannad Shafik · Turnhout</span>
+      <span><a href="mailto:mohannadshafik@msportfolio.be">mohannadshafik@msportfolio.be</a></span>
+    </div>
+  </footer>
+</body>
+</html>

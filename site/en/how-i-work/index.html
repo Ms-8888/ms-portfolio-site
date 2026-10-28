@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>How I work — Mohannad Shafik</title>
+  <meta name="description" content="How I build with an AI assistant without trusting it blindly: a failing test first, then the fix, then independent review.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- seo -->
+  <link rel="canonical" href="https://msportfolio.be/en/how-i-work/">
+  <link rel="alternate" hreflang="nl" href="https://msportfolio.be/hoe-ik-werk/">
+  <link rel="alternate" hreflang="en" href="https://msportfolio.be/en/how-i-work/">
+  <link rel="alternate" hreflang="x-default" href="https://msportfolio.be/hoe-ik-werk/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mohannad Shafik">
+  <meta property="og:title" content="How I work — Mohannad Shafik">
+  <meta property="og:description" content="How I build with an AI assistant without trusting it blindly: a failing test first, then the fix, then independent review.">
+  <meta property="og:url" content="https://msportfolio.be/en/how-i-work/">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="nl_BE">
+  <meta property="og:image" content="https://msportfolio.be/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:alt" content="Mohannad Shafik, Full-Stack Developer — AI &amp; Automation (portrait and name on a teal background)">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- /seo -->
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/en/">Mohannad Shafik</a>
+      <nav class="site-nav" aria-label="Main menu">
+        <ul>
+          <li><a href="/en/">Home</a></li>
+          <li><a href="/en/projects/">Projects</a></li>
+          <li><a href="/en/how-i-work/" aria-current="page">How I work</a></li>
+          <li><a href="/en/cv/">CV</a></li>
+          <li><a href="/en/contact/">Contact</a></li>
+          <li class="lang"><a href="/hoe-ik-werk/" lang="nl" hreflang="nl" aria-label="NL: Nederlandse versie">NL</a> | <span aria-current="true">EN</span></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content">
+    <div class="page-head">
+      <div class="wrap">
+        <p class="kicker">Approach</p>
+        <h1>How I work</h1>
+        <p class="lede">I build with an AI assistant and only believe what it produces once it has been tested.</p>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="case">
+        <h2>In short</h2>
+        <div>
+          <p>I use Claude Code as a tool to write, research and tidy up code faster. I treat what the assistant produces as a first draft: I read it, run it and test it. I decide what goes into the code and I can explain what it does.</p>
+          <p>The reason is simple: an assistant writes fluently and convincingly, even when something is wrong. Without checking, you quickly get more code, but also more mistakes nobody sees.</p>
+        </div>
+
+        <h2>How it goes</h2>
+        <div>
+          <ol class="flow">
+            <li><strong>Goal and limits first</strong><small>what it should do, and what it deliberately shouldn't</small></li>
+            <li><strong>Build in small steps</strong><small>with the assistant, every step read and run</small></li>
+            <li><strong>A failing test first</strong><small>only then the fix, so I'm sure the bug was real</small></li>
+            <li><strong>Standing checks</strong><small>tests, style checks, a scan for secrets and for known vulnerabilities in dependencies</small></li>
+            <li><strong>Independent review</strong><small>several AI reviewers, each with a different role: security, claims, code quality, first impression</small></li>
+            <li><strong>Measure and write it down honestly</strong><small>what was measured, and what hasn't been done yet</small></li>
+          </ol>
+        </div>
+
+        <h2>What it produced</h2>
+        <div>
+          <dl class="ledger">
+            <dt>Measured</dt>
+            <dd>For the knowledge assistant, all 9 problems I reproduced with a failing test turned out to be real. For the data quality tool it was 19 of 22 (the other 3 tested behaviour that was already correct). Without that check, deleted documents would still have produced answers and approving a proposal could have merged two different companies.</dd>
+            <dt>Not yet</dt>
+            <dd>I haven't worked in a team yet: code review by colleagues, a long maintenance period and agreements with a client are things I haven't experienced. That's what I want to learn first.</dd>
+          </dl>
+          <p>A worked example is in the <a href="/en/projects/knowledge-assistant/">knowledge assistant case study</a>: a measurement that looked perfect and, on a closer read, wasn't.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 Mohannad Shafik · Turnhout</span>
+      <span><a href="mailto:mohannadshafik@msportfolio.be">mohannadshafik@msportfolio.be</a></span>
+    </div>
+  </footer>
+</body>
+</html>

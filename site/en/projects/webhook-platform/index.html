@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Webhook platform — Mohannad Shafik</title>
+  <meta name="description" content="Case study: a webhook platform with signed delivery, automatic retries and a dashboard. What was measured and what wasn't.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- seo -->
+  <link rel="canonical" href="https://msportfolio.be/en/projects/webhook-platform/">
+  <link rel="alternate" hreflang="nl" href="https://msportfolio.be/projecten/webhook-platform/">
+  <link rel="alternate" hreflang="en" href="https://msportfolio.be/en/projects/webhook-platform/">
+  <link rel="alternate" hreflang="x-default" href="https://msportfolio.be/projecten/webhook-platform/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mohannad Shafik">
+  <meta property="og:title" content="Webhook platform — Mohannad Shafik">
+  <meta property="og:description" content="Case study: a webhook platform with signed delivery, automatic retries and a dashboard. What was measured and what wasn&#x27;t.">
+  <meta property="og:url" content="https://msportfolio.be/en/projects/webhook-platform/">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="nl_BE">
+  <meta property="og:image" content="https://msportfolio.be/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:alt" content="Mohannad Shafik, Full-Stack Developer — AI &amp; Automation (portrait and name on a teal background)">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- /seo -->
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/en/">Mohannad Shafik</a>
+      <nav class="site-nav" aria-label="Main menu">
+        <ul>
+          <li><a href="/en/">Home</a></li>
+          <li><a href="/en/projects/">Projects</a></li>
+          <li><a href="/en/how-i-work/">How I work</a></li>
+          <li><a href="/en/cv/">CV</a></li>
+          <li><a href="/en/contact/">Contact</a></li>
+          <li class="lang"><a href="/projecten/webhook-platform/" lang="nl" hreflang="nl" aria-label="NL: Nederlandse versie">NL</a> | <span aria-current="true">EN</span></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content">
+    <div class="page-head">
+      <div class="wrap">
+        <p class="crumbs"><a href="/en/projects/">Projects</a> / case study</p>
+        <h1>Webhook platform</h1>
+        <p class="lede">Delivering events reliably to servers that are slow or down.</p>
+        <p class="stack">Python · FastAPI · PostgreSQL · Redis · Docker · React 18 · TypeScript · TanStack Query</p>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="case">
+        <h2>Problem</h2>
+        <div>
+          <p>An application that notifies customers of events (an order was created, a payment failed) has to call those customers' servers. Those servers are sometimes slow, sometimes down and sometimes misconfigured.</p>
+          <p>If the application waits for that call itself, it blocks the user. If it doesn't retry, the event is lost. And without a log, nobody can later prove what was sent.</p>
+        </div>
+
+        <h2>What I built</h2>
+        <div>
+          <ul>
+            <li>An API: the application sends one event and gets an immediate <code>202 Accepted</code>.</li>
+            <li>A background process that sends the event to every registered address, signed with HMAC-SHA256 and a timestamp so the receiver can verify the sender.</li>
+            <li>Automatic retries after 1, 5 and 30 minutes. The state is in PostgreSQL, so a restart loses nothing.</li>
+            <li>A React dashboard that shows deliveries, failures and retries, with a demo mode that works without a server.</li>
+            <li>Security: addresses pointing to internal networks are refused (SSRF check), API keys are stored hashed and each customer is limited to 100 events per hour.</li>
+          </ul>
+        </div>
+
+        <h2>How it works</h2>
+        <div>
+          <ol class="flow">
+            <li><strong>Event comes in</strong><small>POST /events, validated and stored in PostgreSQL</small></li>
+            <li><strong>Queue</strong><small>Redis; the API answers 202 straight away</small></li>
+            <li><strong>Delivery</strong><small>background process sends a signed POST to each address</small></li>
+            <li><strong>Result stored</strong><small>succeeded, or a new attempt scheduled after 1, 5 or 30 minutes</small></li>
+            <li><strong>Dashboard</strong><small>shows every attempt with its error and time</small></li>
+          </ol>
+        </div>
+
+        <h2>Result</h2>
+        <div>
+          <dl class="ledger">
+            <dt>Measured</dt>
+            <dd>On a local Docker setup: an event was sent to a receiver that failed the first attempt. The second attempt arrived after about 60 seconds and the delivery then showed as succeeded, with two attempts. 10 automated tests and green CI.</dd>
+            <dt>Not yet</dt>
+            <dd>No load test, so I don't know how many events per second this can handle. The background process runs inside the same application, not as a separate service. The demo runs on free hosting, so the first request can take half a minute.</dd>
+          </dl>
+          <div class="story">
+            <p><strong>What my own check found.</strong> When I followed the project from a fresh clone, the install instructions didn't work: the application stopped at startup because of a setting, the container looked for the database at the wrong address, 9 of 10 tests failed because of a test-environment setting, and CI didn't run on the default branch. I fixed that in a pull request and corrected the instructions.</p>
+          </div>
+          <ul class="links">
+            <li><a href="https://github.com/Ms-8888/ms-webhook-api" rel="noopener noreferrer">Code: API ↗</a></li>
+            <li><a href="https://github.com/Ms-8888/ms-webhook-ui" rel="noopener noreferrer">Code: dashboard ↗</a></li>
+            <li><a href="https://ms-8888.github.io/ms-webhook-ui/" rel="noopener noreferrer">Dashboard (demo mode) ↗</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 Mohannad Shafik · Turnhout</span>
+      <span><a href="mailto:mohannadshafik@msportfolio.be">mohannadshafik@msportfolio.be</a></span>
+    </div>
+  </footer>
+</body>
+</html>

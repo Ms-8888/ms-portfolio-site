@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Data quality tool — Mohannad Shafik</title>
+  <meta name="description" content="Case study: a tool that finds invalid emails, duplicates and company-name variants and applies only what the user approves.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- seo -->
+  <link rel="canonical" href="https://msportfolio.be/en/projects/data-quality/">
+  <link rel="alternate" hreflang="nl" href="https://msportfolio.be/projecten/datakwaliteit/">
+  <link rel="alternate" hreflang="en" href="https://msportfolio.be/en/projects/data-quality/">
+  <link rel="alternate" hreflang="x-default" href="https://msportfolio.be/projecten/datakwaliteit/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mohannad Shafik">
+  <meta property="og:title" content="Data quality tool — Mohannad Shafik">
+  <meta property="og:description" content="Case study: a tool that finds invalid emails, duplicates and company-name variants and applies only what the user approves.">
+  <meta property="og:url" content="https://msportfolio.be/en/projects/data-quality/">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="nl_BE">
+  <meta property="og:image" content="https://msportfolio.be/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:alt" content="Mohannad Shafik, Full-Stack Developer — AI &amp; Automation (portrait and name on a teal background)">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- /seo -->
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/en/">Mohannad Shafik</a>
+      <nav class="site-nav" aria-label="Main menu">
+        <ul>
+          <li><a href="/en/">Home</a></li>
+          <li><a href="/en/projects/">Projects</a></li>
+          <li><a href="/en/how-i-work/">How I work</a></li>
+          <li><a href="/en/cv/">CV</a></li>
+          <li><a href="/en/contact/">Contact</a></li>
+          <li class="lang"><a href="/projecten/datakwaliteit/" lang="nl" hreflang="nl" aria-label="NL: Nederlandse versie">NL</a> | <span aria-current="true">EN</span></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content">
+    <div class="page-head">
+      <div class="wrap">
+        <p class="crumbs"><a href="/en/projects/">Projects</a> / case study</p>
+        <h1>Data quality tool</h1>
+        <p class="lede">Cleaning customer lists without changing anything you haven't seen.</p>
+        <p class="stack">Python · openpyxl · argparse · optionally a local or hosted language model</p>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="case">
+        <h2>Problem</h2>
+        <div>
+          <p>Customer lists from forms and imports drift: "Acme NV", "ACME N.V." and "acme nv" are three companies in a report, a typo in an email domain makes a mailing bounce, the same person is in the list twice, and an age of 212 skews an average.</p>
+          <p>Cleaning by hand is slow. Cleaning automatically without asking rewrites data you may need.</p>
+        </div>
+
+        <h2>What I built</h2>
+        <div>
+          <ul>
+            <li>A command-line tool with two commands: <code>dq scan</code> shows the problems and changes nothing, <code>dq clean</code> proposes fixes and asks for approval for each change.</li>
+            <li>Five checks: invalid emails (including known typos in the domain), variant spellings of company names, duplicate rows, missing required fields and suspicious numbers.</li>
+            <li>The result is a cleaned copy plus a change report with before and after, what you rejected and what a person has to review. The original file is never overwritten.</li>
+            <li>A language model (local or hosted) can help choose the right company name. The model only sees the spellings, never the rows, and may not invent a name: its answer has to resemble a spelling that really occurs.</li>
+            <li>Safety when writing: text that a spreadsheet program would run as a formula (for example a cell starting with <code>=</code>) is neutralised.</li>
+          </ul>
+        </div>
+
+        <h2>How it works</h2>
+        <div>
+          <ol class="flow">
+            <li><strong>Read file</strong><small>CSV or Excel; rows with too many fields are rejected instead of truncated</small></li>
+            <li><strong>Five checks</strong><small>problems with row number and reason</small></li>
+            <li><strong>Proposals</strong><small>only where a safe fix exists; company name via rules or model</small></li>
+            <li><strong>You approve</strong><small>yes, no, accept all or stop, per change</small></li>
+            <li><strong>Result</strong><small>cleaned file and change report</small></li>
+          </ol>
+        </div>
+
+        <h2>Result</h2>
+        <div>
+          <table class="figures">
+            <caption>Sample file of 40 made-up customers with 16 planted errors</caption>
+            <thead>
+              <tr><th scope="col">Measurement</th><th scope="col">Outcome</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Planted errors found</th><td>16 of 16</td></tr>
+              <tr><th scope="row">Clean rows wrongly flagged</th><td>0</td></tr>
+              <tr><th scope="row">Right company name chosen, rules only</th><td>2 of 3</td></tr>
+              <tr><th scope="row">Same, local model</th><td>3 of 3</td></tr>
+              <tr><th scope="row">Same, Claude (through my own login)</th><td>3 of 3</td></tr>
+              <tr><th scope="row">Automated tests</th><td>63</td></tr>
+            </tbody>
+          </table>
+          <p>The rules missed one group because the most common spelling was itself a typo ("Delta Logistiks"). I put that case in the sample on purpose.</p>
+
+          <dl class="ledger">
+            <dt>Not yet</dt>
+            <dd>Not tested on real files. The sample data and the checks were written by the same person, so "16 of 16" shows the checks do what they promise, not that they are good on real data. Three company groups is very few. The API mode has not been tested yet.</dd>
+          </dl>
+
+          <div class="story">
+            <p><strong>What the independent review found.</strong> Four AI reviewers found problems I hadn't seen, and for most of them I first reproduced them with a failing test. The tool merged companies that don't belong together ("Vision 2000" and "Vision 2001", or chains of similar names), so approving a proposal could overwrite a real customer. Multi-line cells in a CSV were corrupted, and a row with an extra column silently lost that data. Phone numbers got an apostrophe in front of the number when written out. Those are fixed, each with a test. What I deliberately did not fix (finding outliers when almost all values are equal) is listed under "Limitations" in the README.</p>
+          </div>
+
+          <ul class="links">
+            <li><a href="https://github.com/Ms-8888/ms-data-quality" rel="noopener noreferrer">Code and README ↗</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 Mohannad Shafik · Turnhout</span>
+      <span><a href="mailto:mohannadshafik@msportfolio.be">mohannadshafik@msportfolio.be</a></span>
+    </div>
+  </footer>
+</body>
+</html>

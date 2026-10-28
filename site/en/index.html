@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Mohannad Shafik — Full-Stack Developer, AI &amp; Automation</title>
+  <meta name="description" content="Full-stack developer from Turnhout, Belgium, focused on AI and automation. Projects with measured results, on GitHub.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- seo -->
+  <link rel="canonical" href="https://msportfolio.be/en/">
+  <link rel="alternate" hreflang="nl" href="https://msportfolio.be/">
+  <link rel="alternate" hreflang="en" href="https://msportfolio.be/en/">
+  <link rel="alternate" hreflang="x-default" href="https://msportfolio.be/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mohannad Shafik">
+  <meta property="og:title" content="Mohannad Shafik — Full-Stack Developer, AI &amp; Automation">
+  <meta property="og:description" content="Full-stack developer from Turnhout, Belgium, focused on AI and automation. Projects with measured results, on GitHub.">
+  <meta property="og:url" content="https://msportfolio.be/en/">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="nl_BE">
+  <meta property="og:image" content="https://msportfolio.be/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:alt" content="Mohannad Shafik, Full-Stack Developer — AI &amp; Automation (portrait and name on a teal background)">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- /seo -->
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/en/">Mohannad Shafik</a>
+      <nav class="site-nav" aria-label="Main menu">
+        <ul>
+          <li><a href="/en/" aria-current="page">Home</a></li>
+          <li><a href="/en/projects/">Projects</a></li>
+          <li><a href="/en/how-i-work/">How I work</a></li>
+          <li><a href="/en/cv/">CV</a></li>
+          <li><a href="/en/contact/">Contact</a></li>
+          <li class="lang"><a href="/" lang="nl" hreflang="nl" aria-label="NL: Nederlandse versie">NL</a> | <span aria-current="true">EN</span></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content">
+    <div class="hero">
+      <div class="wrap">
+        <div>
+          <p class="kicker">Turnhout, Belgium</p>
+          <h1>Mohannad Shafik</h1>
+          <p class="role">Full-Stack Developer — AI &amp; Automation</p>
+          <p class="about">Full-stack developer from Turnhout focused on AI and automation. I build end-to-end systems in Python and TypeScript: API, database, dashboard and AI integration via the Claude API. My projects are on GitHub, with demos. I'm looking for a first role as a junior developer where I can contribute quickly and keep growing.</p>
+          <p class="contact-line">
+            <a href="mailto:mohannadshafik@msportfolio.be">mohannadshafik@msportfolio.be</a>
+            <a href="https://github.com/Ms-8888" rel="noopener noreferrer">GitHub</a>
+            <a href="https://www.linkedin.com/in/mohannad-shafik/" rel="noopener noreferrer">LinkedIn</a>
+          </p>
+        </div>
+        <figure class="portrait">
+          <img src="/img/headshot.jpg" width="480" height="600" alt="Portrait of Mohannad Shafik">
+        </figure>
+      </div>
+    </div>
+
+    <section aria-labelledby="projects">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="label">Selected work</p>
+          <h2 id="projects">Three projects, with what I measured and what I haven't</h2>
+        </div>
+
+        <ol class="entries">
+          <li class="entry">
+            <div>
+              <h3><a href="/en/projects/webhook-platform/">Webhook platform</a></h3>
+              <p>An application that notifies customers of events has to call their servers, even when those are slow or down. This platform delivers every event signed, retries on failure and shows the outcome in a dashboard.</p>
+              <p class="stack">Python · FastAPI · PostgreSQL · Redis · Docker · React · TypeScript</p>
+              <dl class="ledger">
+                <dt>Measured</dt>
+                <dd>A retry after 60 seconds was tested on a local setup: the first attempt failed, the second succeeded. 10 automated tests, CI green.</dd>
+                <dt>Not yet</dt>
+                <dd>No load test. Free hosting, so the first request can take half a minute.</dd>
+              </dl>
+              <ul class="links">
+                <li><a href="/en/projects/webhook-platform/">Case study →</a></li>
+                <li><a href="https://github.com/Ms-8888/ms-webhook-api" rel="noopener noreferrer">Code: API ↗</a></li>
+                <li><a href="https://github.com/Ms-8888/ms-webhook-ui" rel="noopener noreferrer">Code: dashboard ↗</a></li>
+                <li><a href="https://ms-8888.github.io/ms-webhook-ui/" rel="noopener noreferrer">Dashboard (demo mode) ↗</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="entry">
+            <div>
+              <h3><a href="/en/projects/knowledge-assistant/">Knowledge assistant</a></h3>
+              <p>Answers questions about company documents with cited sources, and says "I don't know" when the answer isn't in them instead of making something up.</p>
+              <p class="stack">Python · FastAPI · PostgreSQL + pgvector · local embeddings · React · Docker</p>
+              <dl class="ledger">
+                <dt>Measured</dt>
+                <dd>The right document is in the top 4 for 28 of 28 test questions. For on-topic questions with no answer in the documents, a local model said "I don't know" 4 out of 4 times; without a language model, 0 out of 4. My own test set of 38 questions.</dd>
+                <dt>Not yet</dt>
+                <dd>The API mode with Claude has not been tested yet. Not tested with real company documents.</dd>
+              </dl>
+              <ul class="links">
+                <li><a href="/en/projects/knowledge-assistant/">Case study →</a></li>
+                <li><a href="https://github.com/Ms-8888/ms-knowledge-assistant" rel="noopener noreferrer">Code ↗</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="entry">
+            <div>
+              <h3><a href="/en/projects/data-quality/">Data quality tool</a></h3>
+              <p>Finds invalid emails, duplicate rows and different spellings of the same company name in CSV and Excel files, and applies only what you approve.</p>
+              <p class="stack">Python · openpyxl · optionally a local or hosted language model</p>
+              <dl class="ledger">
+                <dt>Measured</dt>
+                <dd>Found all 16 planted errors in a sample file without flagging a clean row (my own test data). Choosing the company name: rules 2 of 3, language model 3 of 3 (only 3 groups). 63 automated tests.</dd>
+                <dt>Not yet</dt>
+                <dd>Not tested on real files. The API mode has not been tested yet.</dd>
+              </dl>
+              <ul class="links">
+                <li><a href="/en/projects/data-quality/">Case study →</a></li>
+                <li><a href="https://github.com/Ms-8888/ms-data-quality" rel="noopener noreferrer">Code ↗</a></li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+
+        <p class="more"><a href="/en/projects/">All projects, including the smaller ones →</a></p>
+      </div>
+    </section>
+
+    <section class="band" aria-labelledby="workflow">
+      <div class="wrap">
+        <p class="label">Approach</p>
+        <div>
+          <h2 id="workflow">How I work</h2>
+          <p>I build with AI as a tool and don't trust it blindly: first a failing test, then the fix. Independent reviews of my own projects found real bugs. They are kept as tests in the code.</p>
+          <p><a href="/en/how-i-work/">Read how that works in practice →</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="background">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="label">Background</p>
+          <h2 id="background">Education and skills</h2>
+        </div>
+        <dl class="facts">
+          <div>
+            <dt>Education</dt>
+            <dd>Higher education, ICT / Programming (University of Antwerp, AP University of Applied Sciences, Thomas More) · Sep 2023 – Jul 2026 · not completed</dd>
+            <dd>Computer Management (ICT), Campos Turnhout · Jan 2022 – Jun 2023 · EQF level 4 · diploma obtained</dd>
+          </div>
+          <div>
+            <dt>Technologies</dt>
+            <dd>Python, TypeScript/JavaScript, React, FastAPI, PostgreSQL (pgvector), Redis, Docker, Git/GitHub, REST APIs</dd>
+            <dt>AI</dt>
+            <dd>Claude API (agents, tool use), prompt design, RAG and embeddings, Claude Code</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 Mohannad Shafik · Turnhout</span>
+      <span><a href="mailto:mohannadshafik@msportfolio.be">mohannadshafik@msportfolio.be</a></span>
+    </div>
+  </footer>
+</body>
+</html>

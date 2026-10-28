@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://msportfolio.be/</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://msportfolio.be/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msportfolio.be/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msportfolio.be/"/>
+  </url>
+  <url>
+    <loc>https://msportfolio.be/en/</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://msportfolio.be/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msportfolio.be/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msportfolio.be/"/>
+  </url>
+  <url>
+    <loc>https://msportfolio.be/projecten/</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://msportfolio.be/projecten/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msportfolio.be/en/projects/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msportfolio.be/projecten/"/>
+  </url>
+  <url>
+    <loc>https://msportfolio.be/en/projects/</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://msportfolio.be/projecten/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msportfolio.be/en/projects/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msportfolio.be/projecten/"/>
+  </url>
+  <url>
+    <loc>https://msportfolio.be/projecten/webhook-platform/</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://msportfolio.be/projecten/webhook-platform/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msportfolio.be/en/projects/webhook-platform/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msportfolio.be/projecten/webhook-platform/"/>
+  </url>
+  <url>
+    <loc>https://msportfolio.be/en/projects/webhook-platform/</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://msportfolio.be/projecten/webhook-platform/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msportfolio.be/en/projects/webhook-platform/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msportfolio.be/projecten/webhook-platform/"/>
+  </url>
+  <url>
+    <loc>https://msportfolio.be/projecten/kennisassistent/</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://msportfolio.be/projecten/kennisassistent/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msportfolio.be/en/projects/knowledge-assistant/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msportfolio.be/projecten/kennisassistent/"/>
+  </url>
+  <url>
+    <loc>https://msportfolio.be/en/projects/knowledge-assistant/</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://msportfolio.be/projecten/kennisassistent/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msportfolio.be/en/projects/knowledge-assistant/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msportfolio.be/projecten/kennisassistent/"/>
+  </url>
+  <url>
+    <loc>https://msportfolio.be/projecten/datakwaliteit/</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://msportfolio.be/projecten/datakwaliteit/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msportfolio.be/en/projects/data-quality/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msportfolio.be/projecten/datakwaliteit/"/>
+  </url>
+  <url>
+    <loc>https://msportfolio.be/en/projects/data-quality/</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://msportfolio.be/projecten/datakwaliteit/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msportfolio.be/en/projects/data-quality/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msportfolio.be/projecten/datakwaliteit/"/>
+  </url>
+  <url>
+    <loc>https://msportfolio.be/hoe-ik-werk/</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://msportfolio.be/hoe-ik-werk/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msportfolio.be/en/how-i-work/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msportfolio.be/hoe-ik-werk/"/>
+  </url>
+  <url>
+    <loc>https://msportfolio.be/en/how-i-work/</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://msportfolio.be/hoe-ik-werk/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msportfolio.be/en/how-i-work/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msportfolio.be/hoe-ik-werk/"/>
+  </url>
+  <url>
+    <loc>https://msportfolio.be/cv/</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://msportfolio.be/cv/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msportfolio.be/en/cv/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msportfolio.be/cv/"/>
+  </url>
+  <url>
+    <loc>https://msportfolio.be/en/cv/</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://msportfolio.be/cv/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msportfolio.be/en/cv/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msportfolio.be/cv/"/>
+  </url>
+  <url>
+    <loc>https://msportfolio.be/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://msportfolio.be/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msportfolio.be/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msportfolio.be/contact/"/>
+  </url>
+  <url>
+    <loc>https://msportfolio.be/en/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://msportfolio.be/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msportfolio.be/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msportfolio.be/contact/"/>
+  </url>
+</urlset>

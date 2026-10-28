@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Knowledge assistant — Mohannad Shafik</title>
+  <meta name="description" content="Case study: a RAG assistant that answers from company documents with sources, and refuses when it doesn't know. Measured on 38 questions.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- seo -->
+  <link rel="canonical" href="https://msportfolio.be/en/projects/knowledge-assistant/">
+  <link rel="alternate" hreflang="nl" href="https://msportfolio.be/projecten/kennisassistent/">
+  <link rel="alternate" hreflang="en" href="https://msportfolio.be/en/projects/knowledge-assistant/">
+  <link rel="alternate" hreflang="x-default" href="https://msportfolio.be/projecten/kennisassistent/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mohannad Shafik">
+  <meta property="og:title" content="Knowledge assistant — Mohannad Shafik">
+  <meta property="og:description" content="Case study: a RAG assistant that answers from company documents with sources, and refuses when it doesn&#x27;t know. Measured on 38 questions.">
+  <meta property="og:url" content="https://msportfolio.be/en/projects/knowledge-assistant/">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="nl_BE">
+  <meta property="og:image" content="https://msportfolio.be/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:alt" content="Mohannad Shafik, Full-Stack Developer — AI &amp; Automation (portrait and name on a teal background)">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- /seo -->
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/en/">Mohannad Shafik</a>
+      <nav class="site-nav" aria-label="Main menu">
+        <ul>
+          <li><a href="/en/">Home</a></li>
+          <li><a href="/en/projects/">Projects</a></li>
+          <li><a href="/en/how-i-work/">How I work</a></li>
+          <li><a href="/en/cv/">CV</a></li>
+          <li><a href="/en/contact/">Contact</a></li>
+          <li class="lang"><a href="/projecten/kennisassistent/" lang="nl" hreflang="nl" aria-label="NL: Nederlandse versie">NL</a> | <span aria-current="true">EN</span></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content">
+    <div class="page-head">
+      <div class="wrap">
+        <p class="crumbs"><a href="/en/projects/">Projects</a> / case study</p>
+        <h1>Knowledge assistant</h1>
+        <p class="lede">Answering questions from company documents, with sources, and admitting when the answer isn't there.</p>
+        <p class="stack">Python · FastAPI · PostgreSQL + pgvector · fastembed (ONNX) · React · nginx · Docker</p>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="case">
+        <h2>Problem</h2>
+        <div>
+          <p>Employees keep asking the same questions about holidays, expenses and IT rules, and the answers sit in handbooks nobody searches. Keyword search misses rephrasings ("leave days" versus "holiday days"). A chatbot that answers from memory invents policy.</p>
+          <p>What's needed: an answer that comes from the company's own documents, with the source next to it, and a clear refusal when the documents are silent.</p>
+        </div>
+
+        <h2>What I built</h2>
+        <div>
+          <ul>
+            <li>Reading Markdown, PDF and DOCX files, splitting them into passages and storing them with a vector representation in PostgreSQL (pgvector).</li>
+            <li>The vectors are computed locally with a multilingual model (no key, no account), so search always works, even without a language model.</li>
+            <li>Three ways to give the answer: show only the most relevant passage, a local model (Ollama), or Claude. Every answer shows its sources with file, section and score.</li>
+            <li>An admin view with all questions asked, where unanswered and uncertain questions can be filtered, so the document owners see what's missing.</li>
+            <li>Security: no upload feature, limits on question length and request rate per visitor, admin key compared in constant time, a daily cap and kill switch for paid model calls, API container running as a non-root user.</li>
+          </ul>
+        </div>
+
+        <h2>How it works</h2>
+        <div>
+          <ol class="flow">
+            <li><strong>Read documents</strong><small>split by headings and length (max. 800 characters)</small></li>
+            <li><strong>Compute vectors</strong><small>locally, 384 numbers per passage, stored in pgvector</small></li>
+            <li><strong>Ask a question</strong><small>the question gets the same vector representation</small></li>
+            <li><strong>Four most related passages</strong><small>below a threshold of 0.28 the answer is "I don't know" straight away</small></li>
+            <li><strong>Answer</strong><small>without a model: the best passage; with a model: a short answer or "not found"</small></li>
+            <li><strong>Sources and log</strong><small>the passages are shown; the question is stored for the admin view</small></li>
+          </ol>
+        </div>
+
+        <h2>Result</h2>
+        <div>
+          <p>I wrote 38 test questions and had them checked automatically: is the right document on top, and does the answer contain the expected fact? I set the 0.28 threshold with a separate test of 10 questions, not with these 38.</p>
+          <table class="figures">
+            <caption>My own test set of 38 questions about 5 made-up documents</caption>
+            <thead>
+              <tr><th scope="col">Measurement</th><th scope="col">No model</th><th scope="col">Local model</th><th scope="col">Claude *</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Right fact in the answer (28 questions)</th><td>27</td><td>27</td><td>28</td></tr>
+              <tr><th scope="row">Off-topic questions refused (4)</th><td>4</td><td>4</td><td>4</td></tr>
+              <tr><th scope="row">Right topic but not in the documents, refused (4)</th><td>0</td><td>4</td><td>4</td></tr>
+              <tr><th scope="row">Time per question</th><td>2 s</td><td>3 s</td><td>10 s</td></tr>
+            </tbody>
+          </table>
+          <p>Two prompt-injection questions (a question that tries to mislead the model) are not in this table. The right document was in the top 4 for 28 of the 28 questions, in all three modes. * Claude ran through my own Claude Code login, not through the API.</p>
+
+          <dl class="ledger">
+            <dt>What this says</dt>
+            <dd>Without a language model, "I don't know" only works for questions about a completely different topic. Questions on the right topic but without an answer scored 0.33 to 0.54, and three of the four scored higher than the lowest-scoring real question (0.42). So no threshold can separate them. That takes a model.</dd>
+            <dt>Not yet</dt>
+            <dd>The API mode with Claude has not been tested yet. Not tested with real company documents or under load. The test set is small and written by me, so this is a smoke test, not a benchmark.</dd>
+          </dl>
+
+          <div class="story">
+            <p><strong>The first measurement looked perfect and was wrong.</strong> The local model first scored 28 out of 28. When I read the raw answers, the model had written "Niet_gevonden" and "NIEGT_GEVONDEN" instead of the agreed word. My code only accepted the exact spelling, so those refusals reached the user as an ordinary answer. And my own check looked for the word "niet" (not), which is also in that refusal. I made the code recognise what a refusal is (with tests) and made the check stricter. The local result got worse (27 instead of 28) but more honest. The first run is still in the repo.</p>
+          </div>
+          <div class="story">
+            <p><strong>Then I had four independent AI reviewers review the project</strong> (security, claims, code quality, recruiter). They found real bugs, such as deleted documents that still produced answers and visitors behind nginx sharing one rate limit. For each bug I first wrote a failing test and then the fix. All nine problems I reproduced this way turned out to be real.</p>
+          </div>
+
+          <ul class="links">
+            <li><a href="https://github.com/Ms-8888/ms-knowledge-assistant" rel="noopener noreferrer">Code and README ↗</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 Mohannad Shafik · Turnhout</span>
+      <span><a href="mailto:mohannadshafik@msportfolio.be">mohannadshafik@msportfolio.be</a></span>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Datakwaliteitstool — Mohannad Shafik</title>
+  <meta name="description" content="Casestudy: een opdrachtregeltool die ongeldige e-mails, dubbele rijen en bedrijfsnaamvarianten in CSV en Excel vindt en alleen toepast wat de gebruiker goedkeurt.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- seo -->
+  <link rel="canonical" href="https://msportfolio.be/projecten/datakwaliteit/">
+  <link rel="alternate" hreflang="nl" href="https://msportfolio.be/projecten/datakwaliteit/">
+  <link rel="alternate" hreflang="en" href="https://msportfolio.be/en/projects/data-quality/">
+  <link rel="alternate" hreflang="x-default" href="https://msportfolio.be/projecten/datakwaliteit/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mohannad Shafik">
+  <meta property="og:title" content="Datakwaliteitstool — Mohannad Shafik">
+  <meta property="og:description" content="Casestudy: een opdrachtregeltool die ongeldige e-mails, dubbele rijen en bedrijfsnaamvarianten in CSV en Excel vindt en alleen toepast wat de gebruiker goedkeurt.">
+  <meta property="og:url" content="https://msportfolio.be/projecten/datakwaliteit/">
+  <meta property="og:locale" content="nl_BE">
+  <meta property="og:locale:alternate" content="en_GB">
+  <meta property="og:image" content="https://msportfolio.be/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:alt" content="Mohannad Shafik, Full-Stack Developer — AI &amp; Automation (portrait and name on a teal background)">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- /seo -->
+</head>
+<body>
+  <a class="skip" href="#inhoud">Naar de inhoud</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">Mohannad Shafik</a>
+      <nav class="site-nav" aria-label="Hoofdmenu">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/projecten/" aria-current="page">Projecten</a></li>
+          <li><a href="/hoe-ik-werk/">Hoe ik werk</a></li>
+          <li><a href="/cv/">CV</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li class="lang"><span aria-current="true">NL</span> | <a href="/en/projects/data-quality/" lang="en" hreflang="en" aria-label="EN: English version">EN</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inhoud">
+    <div class="page-head">
+      <div class="wrap">
+        <p class="crumbs"><a href="/projecten/">Projecten</a> / casestudy</p>
+        <h1>Datakwaliteitstool</h1>
+        <p class="lede">Klantenlijsten opschonen zonder dat er iets verandert wat jij niet gezien hebt.</p>
+        <p class="stack">Python · openpyxl · argparse · optioneel een lokaal of gehost taalmodel</p>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="case">
+        <h2>Probleem</h2>
+        <div>
+          <p>Klantenlijsten uit formulieren en importbestanden raken snel vervuild: "Acme NV", "ACME N.V." en "acme nv" zijn in een rapport drie bedrijven, een tikfout in een e-maildomein zorgt ervoor dat een mailing niet aankomt, dezelfde persoon staat twee keer in de lijst, en een leeftijd van 212 vertekent een gemiddelde.</p>
+          <p>Met de hand opschonen is traag. Automatisch opschonen zonder te vragen herschrijft gegevens die je misschien nodig hebt.</p>
+        </div>
+
+        <h2>Wat ik gebouwd heb</h2>
+        <div>
+          <ul>
+            <li>Een opdrachtregeltool met twee commando's: <code>dq scan</code> toont de problemen en wijzigt niets, <code>dq clean</code> stelt oplossingen voor en vraagt bij elke wijziging om goedkeuring.</li>
+            <li>Vijf controles: ongeldige e-mails (ook bekende tikfouten in het domein), schrijfwijzen van bedrijfsnamen, dubbele rijen, ontbrekende verplichte velden en verdachte getallen.</li>
+            <li>Het resultaat is een opgeschoonde kopie plus een wijzigingsrapport met voor en na, wat je afgewezen hebt en wat een mens moet nakijken. Het oorspronkelijke bestand wordt nooit overschreven.</li>
+            <li>Voor het kiezen van de juiste bedrijfsnaam kan een taalmodel helpen (lokaal of gehost). Het model krijgt alleen de schrijfwijzen te zien, nooit de rijen, en mag geen naam verzinnen: het antwoord moet overeenkomen met een schrijfwijze die echt voorkomt.</li>
+            <li>Veiligheid bij het wegschrijven: tekst die een spreadsheetprogramma (zoals Excel) als formule zou uitvoeren (bijvoorbeeld een cel die met <code>=</code> begint) wordt onschadelijk gemaakt.</li>
+          </ul>
+        </div>
+
+        <h2>Hoe het werkt</h2>
+        <div>
+          <ol class="flow">
+            <li><strong>Bestand lezen</strong><small>CSV of Excel, rijen met te veel velden worden geweigerd in plaats van afgekapt</small></li>
+            <li><strong>Vijf controles</strong><small>problemen met rijnummer en reden</small></li>
+            <li><strong>Voorstellen</strong><small>alleen waar een veilige oplossing bestaat; bedrijfsnaam via regels of model</small></li>
+            <li><strong>Jij keurt goed</strong><small>ja, nee, alles accepteren of stoppen, per wijziging</small></li>
+            <li><strong>Resultaat</strong><small>opgeschoond bestand en wijzigingsrapport</small></li>
+          </ol>
+        </div>
+
+        <h2>Resultaat</h2>
+        <div>
+          <table class="figures">
+            <caption>Voorbeeldbestand van 40 verzonnen klanten met 16 geplante fouten</caption>
+            <thead>
+              <tr><th scope="col">Meting</th><th scope="col">Uitkomst</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Geplante fouten gevonden</th><td>16 van 16</td></tr>
+              <tr><th scope="row">Nette rijen ten onrechte gemarkeerd</th><td>0</td></tr>
+              <tr><th scope="row">Juiste bedrijfsnaam gekozen, alleen regels</th><td>2 van 3</td></tr>
+              <tr><th scope="row">Idem, lokaal model</th><td>3 van 3</td></tr>
+              <tr><th scope="row">Idem, Claude (via mijn eigen aanmelding)</th><td>3 van 3</td></tr>
+              <tr><th scope="row">Geautomatiseerde tests</th><td>63</td></tr>
+            </tbody>
+          </table>
+          <p>De regels misten één groep omdat de meest voorkomende schrijfwijze zelf een tikfout was ("Delta Logistiks"). Dat geval heb ik bewust in het voorbeeld gezet.</p>
+
+          <dl class="ledger">
+            <dt>Nog niet</dt>
+            <dd>Niet getest op echte bestanden. De voorbeelddata en de controles zijn door dezelfde persoon geschreven, dus "16 van 16" bewijst dat de controles doen wat ze beloven, niet dat ze op echte data goed zijn. Drie bedrijfsgroepen is erg weinig. De API-modus is nog niet getest.</dd>
+          </dl>
+
+          <div class="story">
+            <p><strong>Wat de onafhankelijke controle opleverde.</strong> Vier AI-reviewers vonden problemen die ik zelf niet gezien had, en voor het merendeel bootste ik ze eerst na met een falende test. De tool voegde bedrijven samen die niet bij elkaar horen ("Vision 2000" en "Vision 2001", of ketens van lijkende namen), zodat het goedkeuren van een voorstel een echte klant kon overschrijven. Meerregelige cellen in een CSV werden beschadigd, en een rij met een extra kolom verloor stilzwijgend die gegevens. Telefoonnummers kregen bij het wegschrijven een apostrof voor het getal. Die zijn opgelost, elk met een test. Wat ik bewust niet opgelost heb (uitschieters vinden als bijna alle waarden gelijk zijn) staat onder 'Beperkingen' in de README.</p>
+          </div>
+
+          <ul class="links">
+            <li><a href="https://github.com/Ms-8888/ms-data-quality" rel="noopener noreferrer">Code en README ↗</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 Mohannad Shafik · Turnhout</span>
+      <span><a href="mailto:mohannadshafik@msportfolio.be">mohannadshafik@msportfolio.be</a></span>
+    </div>
+  </footer>
+</body>
+</html>
