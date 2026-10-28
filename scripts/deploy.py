@@ -10,6 +10,8 @@ Commands (run with the project's venv: .venv\\Scripts\\python scripts\\deploy.py
     backup [remote_dir]   read-only: download a remote folder (default <root>/project2) into backup/
     deploy                dry run: show what would be uploaded where (no upload)
     deploy --yes          upload every file in site/ to the root, then compare sizes
+    htaccess --yes        upload extras/htaccess.txt as <root>/.htaccess, re-check the live pages and remove the
+                          file again if any page stops answering
     remove-old --yes      delete <root>/project2 ONLY (the retired old site), after checking that its file
                           count equals the newest local backup/remote-project2-* folder
 
@@ -196,16 +198,56 @@ def cmd_remove_old(args):
     print("deleted", target)
 
 
+LIVE = "https://msportfolio.be"
+CHECK_PATHS = ["/", "/en/", "/projecten/", "/en/projects/", "/cv/", "/contact/", "/css/style.css", "/img/og-image-v2.jpg"]
+
+
+def live_ok() -> list[str]:
+    import urllib.request, urllib.error
+    bad = []
+    for path in CHECK_PATHS:
+        try:
+            with urllib.request.urlopen(urllib.request.Request(LIVE + path, headers={"User-Agent": "site-check/1.0"}), timeout=25) as r:
+                if r.status != 200:
+                    bad.append(f"{path}: {r.status}")
+        except urllib.error.HTTPError as e:
+            bad.append(f"{path}: {e.code}")
+        except Exception as e:
+            bad.append(f"{path}: {type(e).__name__}")
+    return bad
+
+
+def cmd_htaccess(args):
+    source = PROJECT / "extras" / "htaccess.txt"
+    sftp = connect(args)
+    target = posixpath.join(remote_root(args, sftp), ".htaccess")
+    try:
+        sftp.stat(target)
+        sys.exit("STOP: a .htaccess already exists on the server; not overwriting it")
+    except FileNotFoundError:
+        pass
+    if not args.yes:
+        print(f"dry run: would upload {source.name} as {target}. Add --yes to upload.")
+        return
+    sftp.put(str(source), target)
+    time.sleep(3)
+    bad = live_ok()
+    if bad:
+        sftp.remove(target)
+        sys.exit("ROLLED BACK (.htaccess removed), problems: " + "; ".join(bad))
+    print("uploaded .htaccess; all checked pages still answer 200")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("command", choices=["plan", "list", "backup", "deploy", "remove-old"])
+    parser.add_argument("command", choices=["plan", "list", "backup", "deploy", "remove-old", "htaccess"])
     parser.add_argument("path", nargs="?")
     parser.add_argument("--env", default=str(DEFAULT_ENV))
     parser.add_argument("--root")
     parser.add_argument("--yes", action="store_true")
     parser.add_argument("--trust-new-host", action="store_true")
     args = parser.parse_args()
-    {"plan": cmd_plan, "list": cmd_list, "backup": cmd_backup, "deploy": cmd_deploy, "remove-old": cmd_remove_old}[args.command](args)
+    {"plan": cmd_plan, "list": cmd_list, "backup": cmd_backup, "deploy": cmd_deploy, "remove-old": cmd_remove_old, "htaccess": cmd_htaccess}[args.command](args)
 
 
 if __name__ == "__main__":
