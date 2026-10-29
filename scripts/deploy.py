@@ -199,7 +199,7 @@ def cmd_remove_old(args):
 
 
 LIVE = "https://msportfolio.be"
-CHECK_PATHS = ["/", "/en/", "/projecten/", "/en/projects/", "/cv/", "/contact/", "/css/style.css", "/img/og-image-v2.jpg"]
+CHECK_PATHS = ["/", "/en/", "/projecten/", "/en/projects/", "/cv/", "/contact/", "/css/style.css", "/img/og-image-v3.jpg"]
 
 
 def live_ok() -> list[str]:

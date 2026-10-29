@@ -49,6 +49,15 @@ def json_ld(path: str, is_en: bool, desc: str) -> str:
                 "publisher": {"@id": BASE + "/#person"},
             },
             {
+                "@type": "ProfilePage",
+                "@id": BASE + path + "#profile",
+                "url": BASE + path,
+                "name": "Mohannad Shafik — Full-Stack Developer, AI & Automation",
+                "inLanguage": "en" if is_en else "nl-BE",
+                "isPartOf": {"@id": BASE + "/#website"},
+                "mainEntity": {"@id": BASE + "/#person"},
+            },
+            {
                 "@type": "Person",
                 "@id": BASE + "/#person",
                 "name": "Mohannad Shafik",
@@ -89,15 +98,16 @@ def build_block(path: str) -> str:
   <meta property="og:url" content="{own}">
   <meta property="og:locale" content="{'en_GB' if is_en else 'nl_BE'}">
   <meta property="og:locale:alternate" content="{'nl_BE' if is_en else 'en_GB'}">
-  <meta property="og:image" content="{BASE}/img/og-image-v2.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image" content="{BASE}/img/og-image-v3.jpg">
+  <meta property="og:image:secure_url" content="{BASE}/img/og-image-v3.jpg">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="838">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:alt" content="Mohannad Shafik, Full-Stack Developer — AI &amp; Automation (portrait and name on a teal background)">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{esc(title)}">
   <meta name="twitter:description" content="{esc(desc)}">
-  <meta name="twitter:image" content="{BASE}/img/og-image-v2.jpg">
+  <meta name="twitter:image" content="{BASE}/img/og-image-v3.jpg">
   <meta name="twitter:image:alt" content="Mohannad Shafik, Full-Stack Developer — AI &amp; Automation">
   <!-- /seo -->
 """
