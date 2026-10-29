@@ -808,3 +808,7 @@ code { border-radius: 4px; }
 .site-nav .lang a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
 
 html { scrollbar-gutter: stable; }
+
+.shot { margin: 0; }
+.shot img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 6px; }
+.shot figcaption { margin-top: .5rem; font-size: .9rem; color: var(--muted); }
