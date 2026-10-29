@@ -81,6 +81,7 @@
             <li>A background process that sends the event to every registered address, signed with HMAC-SHA256 and a timestamp so the receiver can verify the sender.</li>
             <li>Automatic retries after 1, 5 and 30 minutes. The state is in PostgreSQL, so a restart loses nothing.</li>
             <li>A React dashboard that shows deliveries, failures and retries, with a demo mode that works without a server.</li>
+            <li>The same API rebuilt in C# with ASP.NET Core 8 and EF Core (<a href="https://github.com/Ms-8888/ms-webhook-api-dotnet">ms-webhook-api-dotnet</a>): same routes and JSON, 70 automated tests, and the dashboard was checked against it in a browser. Not load tested, not deployed, and the tests run on SQLite, not PostgreSQL.</li>
             <li>Security: addresses pointing to internal networks are refused (SSRF check), API keys are stored hashed and each customer is limited to 100 events per hour.</li>
           </ul>
         </div>

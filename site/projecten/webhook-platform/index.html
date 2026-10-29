@@ -81,6 +81,7 @@
             <li>Een achtergrondproces dat het event naar elk geregistreerd adres stuurt, ondertekend met HMAC-SHA256 en een tijdstempel, zodat de ontvanger kan controleren wie de afzender is.</li>
             <li>Automatisch opnieuw proberen na 1, 5 en 30 minuten. De status staat in PostgreSQL, dus bij een herstart gaat er niets verloren.</li>
             <li>Een React-dashboard dat afleveringen, mislukkingen en nieuwe pogingen toont, met een demo-modus die zonder server werkt.</li>
+            <li>Dezelfde API opnieuw gebouwd in C# met ASP.NET Core 8 en EF Core (<a href="https://github.com/Ms-8888/ms-webhook-api-dotnet">ms-webhook-api-dotnet</a>): zelfde routes en JSON, 70 geautomatiseerde tests, en het dashboard is er in een browser tegen gecontroleerd. Geen belastingtest, niet gedeployed, en de tests draaien op SQLite, niet op PostgreSQL.</li>
             <li>Beveiliging: adressen naar interne netwerken worden geweigerd (SSRF-controle), API-sleutels worden gehasht opgeslagen en elke klant mag maximaal 100 events per uur versturen.</li>
           </ul>
         </div>
