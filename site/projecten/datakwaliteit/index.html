@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Datakwaliteitstool — Mohannad Shafik</title>
-  <meta name="description" content="Casestudy: een opdrachtregeltool die ongeldige e-mails, dubbele rijen en bedrijfsnaamvarianten in CSV en Excel vindt en alleen toepast wat de gebruiker goedkeurt.">
+  <meta name="description" content="Casestudy: een command-linetool die ongeldige e-mailadressen, dubbele rijen en bedrijfsnaamvarianten in CSV en Excel opspoort en alleen aanpast wat de gebruiker goedkeurt.">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -20,7 +20,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Mohannad Shafik">
   <meta property="og:title" content="Datakwaliteitstool — Mohannad Shafik">
-  <meta property="og:description" content="Casestudy: een opdrachtregeltool die ongeldige e-mails, dubbele rijen en bedrijfsnaamvarianten in CSV en Excel vindt en alleen toepast wat de gebruiker goedkeurt.">
+  <meta property="og:description" content="Casestudy: een command-linetool die ongeldige e-mailadressen, dubbele rijen en bedrijfsnaamvarianten in CSV en Excel opspoort en alleen aanpast wat de gebruiker goedkeurt.">
   <meta property="og:url" content="https://msportfolio.be/projecten/datakwaliteit/">
   <meta property="og:locale" content="nl_BE">
   <meta property="og:locale:alternate" content="en_GB">
@@ -31,7 +31,7 @@
   <meta property="og:image:alt" content="Mohannad Shafik, Full-Stack Developer — AI &amp; Automation (portrait and name on a teal background)">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Datakwaliteitstool — Mohannad Shafik">
-  <meta name="twitter:description" content="Casestudy: een opdrachtregeltool die ongeldige e-mails, dubbele rijen en bedrijfsnaamvarianten in CSV en Excel vindt en alleen toepast wat de gebruiker goedkeurt.">
+  <meta name="twitter:description" content="Casestudy: een command-linetool die ongeldige e-mailadressen, dubbele rijen en bedrijfsnaamvarianten in CSV en Excel opspoort en alleen aanpast wat de gebruiker goedkeurt.">
   <meta name="twitter:image" content="https://msportfolio.be/img/og-image-v2.jpg">
   <meta name="twitter:image:alt" content="Mohannad Shafik, Full-Stack Developer — AI &amp; Automation">
   <!-- /seo -->
@@ -69,18 +69,18 @@
       <div class="case">
         <h2>Probleem</h2>
         <div>
-          <p>Klantenlijsten uit formulieren en importbestanden raken snel vervuild: "Acme NV", "ACME N.V." en "acme nv" zijn in een rapport drie bedrijven, een tikfout in een e-maildomein zorgt ervoor dat een mailing niet aankomt, dezelfde persoon staat twee keer in de lijst, en een leeftijd van 212 vertekent een gemiddelde.</p>
-          <p>Met de hand opschonen is traag. Automatisch opschonen zonder te vragen herschrijft gegevens die je misschien nodig hebt.</p>
+          <p>Klantenlijsten uit formulieren en importbestanden raken snel vervuild. "Acme NV", "ACME N.V." en "acme nv" tellen in een rapport als drie bedrijven, door een tikfout in een e-maildomein komt een mailing niet aan, dezelfde persoon staat twee keer in de lijst en een leeftijd van 212 vertekent het gemiddelde.</p>
+          <p>Met de hand opschonen duurt lang. Automatisch opschonen zonder te vragen overschrijft gegevens die je misschien nog nodig hebt.</p>
         </div>
 
         <h2>Wat ik gebouwd heb</h2>
         <div>
           <ul>
-            <li>Een opdrachtregeltool met twee commando's: <code>dq scan</code> toont de problemen en wijzigt niets, <code>dq clean</code> stelt oplossingen voor en vraagt bij elke wijziging om goedkeuring.</li>
-            <li>Vijf controles: ongeldige e-mails (ook bekende tikfouten in het domein), schrijfwijzen van bedrijfsnamen, dubbele rijen, ontbrekende verplichte velden en verdachte getallen.</li>
-            <li>Het resultaat is een opgeschoonde kopie plus een wijzigingsrapport met voor en na, wat je afgewezen hebt en wat een mens moet nakijken. Het oorspronkelijke bestand wordt nooit overschreven.</li>
-            <li>Voor het kiezen van de juiste bedrijfsnaam kan een taalmodel helpen (lokaal of gehost). Het model krijgt alleen de schrijfwijzen te zien, nooit de rijen, en mag geen naam verzinnen: het antwoord moet overeenkomen met een schrijfwijze die echt voorkomt.</li>
-            <li>Veiligheid bij het wegschrijven: tekst die een spreadsheetprogramma (zoals Excel) als formule zou uitvoeren (bijvoorbeeld een cel die met <code>=</code> begint) wordt onschadelijk gemaakt.</li>
+            <li>Een command-linetool met twee commando's: <code>dq scan</code> toont de problemen en wijzigt niets, <code>dq clean</code> stelt oplossingen voor en vraagt bij elke wijziging om goedkeuring.</li>
+            <li>Vijf controles: ongeldige e-mailadressen (ook bekende tikfouten in het domein), schrijfwijzen van bedrijfsnamen, dubbele rijen, ontbrekende verplichte velden en verdachte getallen.</li>
+            <li>Het resultaat is een opgeschoonde kopie plus een wijzigingsrapport met de situatie voor en na, wat je geweigerd hebt en wat nog nagekeken moet worden. Het originele bestand wordt nooit overschreven.</li>
+            <li>Om de juiste bedrijfsnaam te kiezen kan een taalmodel helpen (lokaal of gehost). Het model krijgt alleen de schrijfwijzen te zien, nooit de rijen, en mag geen naam verzinnen: het antwoord moet overeenkomen met een schrijfwijze die echt voorkomt.</li>
+            <li>Veilig wegschrijven: tekst die een spreadsheetprogramma zoals Excel als formule zou uitvoeren (bijvoorbeeld een cel die met <code>=</code> begint) wordt onschadelijk gemaakt.</li>
           </ul>
         </div>
 
@@ -98,28 +98,28 @@
         <h2>Resultaat</h2>
         <div>
           <table class="figures">
-            <caption>Voorbeeldbestand van 40 verzonnen klanten met 16 geplante fouten</caption>
+            <caption>Voorbeeldbestand van 40 verzonnen klanten met 16 opzettelijk ingebouwde fouten</caption>
             <thead>
               <tr><th scope="col">Meting</th><th scope="col">Uitkomst</th></tr>
             </thead>
             <tbody>
-              <tr><th scope="row">Geplante fouten gevonden</th><td>16 van 16</td></tr>
-              <tr><th scope="row">Nette rijen ten onrechte gemarkeerd</th><td>0</td></tr>
+              <tr><th scope="row">Ingebouwde fouten gevonden</th><td>16 van 16</td></tr>
+              <tr><th scope="row">Correcte rijen ten onrechte gemarkeerd</th><td>0</td></tr>
               <tr><th scope="row">Juiste bedrijfsnaam gekozen, alleen regels</th><td>2 van 3</td></tr>
               <tr><th scope="row">Idem, lokaal model</th><td>3 van 3</td></tr>
               <tr><th scope="row">Idem, Claude (via mijn eigen aanmelding)</th><td>3 van 3</td></tr>
-              <tr><th scope="row">Geautomatiseerde tests</th><td>63</td></tr>
+              <tr><th scope="row">Automatische tests</th><td>63</td></tr>
             </tbody>
           </table>
-          <p>De regels misten één groep omdat de meest voorkomende schrijfwijze zelf een tikfout was ("Delta Logistiks"). Dat geval heb ik bewust in het voorbeeld gezet.</p>
+          <p>De regels misten één groep omdat de meest voorkomende schrijfwijze zelf een tikfout was ("Delta Logistiks"). Dat geval heb ik er bewust in gezet.</p>
 
           <dl class="ledger">
-            <dt>Nog niet</dt>
-            <dd>Niet getest op echte bestanden. De voorbeelddata en de controles zijn door dezelfde persoon geschreven, dus "16 van 16" bewijst dat de controles doen wat ze beloven, niet dat ze op echte data goed zijn. Drie bedrijfsgroepen is erg weinig. De API-modus is nog niet getest.</dd>
+            <dt>Nog niet gedaan</dt>
+            <dd>Nog niet getest op echte bestanden. De voorbeelddata en de controles heb ik allebei zelf geschreven, dus "16 van 16" bewijst dat de controles doen wat ze beloven, niet dat ze ook op echte data goed werken. Drie bedrijfsgroepen is erg weinig. De API-modus heb ik ook nog niet getest.</dd>
           </dl>
 
           <div class="story">
-            <p><strong>Wat de onafhankelijke controle opleverde.</strong> Vier AI-reviewers vonden problemen die ik zelf niet gezien had, en voor het merendeel bootste ik ze eerst na met een falende test. De tool voegde bedrijven samen die niet bij elkaar horen ("Vision 2000" en "Vision 2001", of ketens van lijkende namen), zodat het goedkeuren van een voorstel een echte klant kon overschrijven. Meerregelige cellen in een CSV werden beschadigd, en een rij met een extra kolom verloor stilzwijgend die gegevens. Telefoonnummers kregen bij het wegschrijven een apostrof voor het getal. Die zijn opgelost, elk met een test. Wat ik bewust niet opgelost heb (uitschieters vinden als bijna alle waarden gelijk zijn) staat onder 'Beperkingen' in de README.</p>
+            <p><strong>Wat de onafhankelijke controle opleverde.</strong> Vier AI-reviewers vonden problemen die ik zelf niet had gezien. Voor de meeste bootste ik ze eerst na met een falende test. De tool voegde bedrijven samen die niet bij elkaar horen ("Vision 2000" en "Vision 2001", of ketens van gelijkende namen), waardoor het goedkeuren van een voorstel een echte klant kon overschrijven. Cellen met meerdere regels in een CSV raakten beschadigd en een rij met een extra kolom verloor stilzwijgend die gegevens. Telefoonnummers kregen bij het wegschrijven een apostrof voor het getal. Dat heb ik allemaal opgelost, elk met een test. Wat ik bewust niet heb opgelost (uitschieters vinden als bijna alle waarden gelijk zijn) staat onder 'Beperkingen' in de README.</p>
           </div>
 
           <ul class="links">
@@ -132,7 +132,7 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <span>© 2026 Mohannad Shafik · Turnhout</span>
+      <span>© 2026 Mohannad Shafik · MS Portfolio · Turnhout</span>
       <span><a href="mailto:mohannadshafik@msportfolio.be">mohannadshafik@msportfolio.be</a></span>
     </div>
   </footer>

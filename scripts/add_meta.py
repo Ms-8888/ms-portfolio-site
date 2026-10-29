@@ -7,6 +7,7 @@ Idempotent: the generated block sits between <!-- seo --> markers.
 """
 
 import html
+import json
 import re
 from pathlib import Path
 
@@ -31,6 +32,43 @@ def file_for(path: str) -> Path:
     return SITE / path.strip("/") / "index.html" if path != "/" else SITE / "index.html"
 
 
+def json_ld(path: str, is_en: bool, desc: str) -> str:
+    """Structured data for search engines and AI assistants; only on the two home pages."""
+    if path not in ("/", "/en/"):
+        return ""
+    graph = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "@id": BASE + "/#website",
+                "url": BASE + "/",
+                "name": "Mohannad Shafik",
+                "alternateName": ["MS Portfolio", "msportfolio.be"],
+                "inLanguage": ["nl-BE", "en"],
+                "publisher": {"@id": BASE + "/#person"},
+            },
+            {
+                "@type": "Person",
+                "@id": BASE + "/#person",
+                "name": "Mohannad Shafik",
+                "alternateName": "MS Portfolio",
+                "url": BASE + "/",
+                "image": BASE + "/img/headshot.jpg",
+                "jobTitle": "Full-Stack Developer — AI & Automation",
+                "description": desc,
+                "email": "mailto:mohannadshafik@msportfolio.be",
+                "address": {"@type": "PostalAddress", "addressLocality": "Turnhout", "addressCountry": "BE"},
+                "knowsLanguage": ["nl", "ar", "en", "fr"],
+                "knowsAbout": ["Python", "TypeScript", "FastAPI", "React", "PostgreSQL", "Docker",
+                               "Claude API", "RAG", "Automation"],
+                "sameAs": ["https://github.com/Ms-8888", "https://www.linkedin.com/in/mohannad-shafik/"],
+            },
+        ],
+    }
+    return '  <script type="application/ld+json">' + json.dumps(graph, ensure_ascii=False) + "</script>\n"
+
+
 def build_block(path: str) -> str:
     is_en = path in EN_TO_NL
     nl, en = (EN_TO_NL[path], path) if is_en else (path, PAIRS[path])
@@ -40,7 +78,7 @@ def build_block(path: str) -> str:
     esc = lambda text: html.escape(text, quote=True)
     own = BASE + path
     return f"""  <!-- seo -->
-  <link rel="canonical" href="{own}">
+{json_ld(path, is_en, desc)}  <link rel="canonical" href="{own}">
   <link rel="alternate" hreflang="nl" href="{BASE + nl}">
   <link rel="alternate" hreflang="en" href="{BASE + en}">
   <link rel="alternate" hreflang="x-default" href="{BASE + nl}">
@@ -92,7 +130,10 @@ def main() -> None:
         + "\n</urlset>\n",
         encoding="utf-8",
     )
-    (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n", encoding="utf-8")
+    bots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-User", "Claude-SearchBot",
+            "PerplexityBot", "Perplexity-User", "Google-Extended", "Applebot-Extended", "CCBot"]
+    robots = "User-agent: *\nAllow: /\n\n" + "".join(f"User-agent: {b}\nAllow: /\n\n" for b in bots)
+    (SITE / "robots.txt").write_text(robots + f"Sitemap: {BASE}/sitemap.xml\n", encoding="utf-8")
     print(f"updated {len(PAIRS) * 2} pages, sitemap.xml and robots.txt")
 
 

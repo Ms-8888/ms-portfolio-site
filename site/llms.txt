@@ -1,0 +1,28 @@
+# Mohannad Shafik (MS Portfolio)
+
+> Mohannad Shafik is a full-stack developer from Turnhout, Belgium, working on AI and automation. He builds complete systems in Python and TypeScript (API, database, dashboard, Claude API integration) and is looking for a first role as a junior developer. This site (msportfolio.be, also written "MS Portfolio") is his portfolio, in Dutch and English. Each project states what was measured and what has not been done yet.
+
+Contact: mohannadshafik@msportfolio.be · GitHub: https://github.com/Ms-8888 · LinkedIn: https://www.linkedin.com/in/mohannad-shafik/
+
+## English
+- [Home](https://msportfolio.be/en/): profile, selected projects, education and skills
+- [Projects](https://msportfolio.be/en/projects/): six projects, five with open code and one private
+- [Webhook platform](https://msportfolio.be/en/projects/webhook-platform/): signed webhook delivery with automatic retries and a dashboard (FastAPI, PostgreSQL, Redis, React)
+- [Knowledge assistant](https://msportfolio.be/en/projects/knowledge-assistant/): Dutch Q&A over company documents with cited sources and an honest "I don't know" (FastAPI, pgvector)
+- [Data quality tool](https://msportfolio.be/en/projects/data-quality/): finds bad emails, duplicates and company-name variants in CSV/Excel and applies only what the user approves
+- [How I work](https://msportfolio.be/en/how-i-work/): building with an AI assistant without trusting it blindly
+- [CV](https://msportfolio.be/en/cv/): one-page CV as PDF, Dutch and English
+- [Contact](https://msportfolio.be/en/contact/)
+
+## Nederlands
+- [Home](https://msportfolio.be/): profiel, uitgelichte projecten, opleiding en vaardigheden
+- [Projecten](https://msportfolio.be/projecten/)
+- [Webhook-platform](https://msportfolio.be/projecten/webhook-platform/)
+- [Kennisassistent](https://msportfolio.be/projecten/kennisassistent/)
+- [Datakwaliteitstool](https://msportfolio.be/projecten/datakwaliteit/)
+- [Hoe ik werk](https://msportfolio.be/hoe-ik-werk/)
+- [CV](https://msportfolio.be/cv/)
+- [Contact](https://msportfolio.be/contact/)
+
+## Code
+- [ms-webhook-api](https://github.com/Ms-8888/ms-webhook-api), [ms-webhook-ui](https://github.com/Ms-8888/ms-webhook-ui), [ms-knowledge-assistant](https://github.com/Ms-8888/ms-knowledge-assistant), [ms-data-quality](https://github.com/Ms-8888/ms-data-quality), [ms-ai-review](https://github.com/Ms-8888/ms-ai-review), [ms-agent](https://github.com/Ms-8888/ms-agent)

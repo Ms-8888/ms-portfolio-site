@@ -60,7 +60,7 @@
       <div class="wrap">
         <p class="kicker">Projecten</p>
         <h1>Wat ik gebouwd heb</h1>
-        <p class="lede">Zes projecten: vijf met open code (in zes repo's) en één privé. Bij elk staat wat ik nog niet gedaan heb, en bij de meeste ook wat ik gemeten heb.</p>
+        <p class="lede">Zes projecten, vijf met open code (verdeeld over zes repo's) en één privé. Bij elk staat wat ik nog niet gedaan heb, en bij de meeste ook wat ik gemeten heb.</p>
       </div>
     </div>
 
@@ -69,7 +69,7 @@
         <li>
           <p class="tag">Casestudy</p>
           <h2><a href="/projecten/webhook-platform/">Webhook-platform</a></h2>
-          <p>Levert gebeurtenissen betrouwbaar af bij de servers van klanten: ondertekend, met automatische herpogingen en een overzicht van elke levering.</p>
+          <p>Stuurt events betrouwbaar door naar de servers van klanten: ondertekend, met automatische nieuwe pogingen en een overzicht van elke aflevering.</p>
           <p class="stack">Python · FastAPI · PostgreSQL · Redis · Docker · React · TypeScript</p>
           <ul class="links">
             <li><a href="/projecten/webhook-platform/">Lees de casestudy →</a></li>
@@ -93,7 +93,7 @@
         <li>
           <p class="tag">Casestudy</p>
           <h2><a href="/projecten/datakwaliteit/">Datakwaliteitstool</a></h2>
-          <p>Vindt ongeldige e-mails, dubbele rijen en verschillende schrijfwijzen van dezelfde bedrijfsnaam in CSV- en Excel-bestanden, en past alleen toe wat de gebruiker goedkeurt.</p>
+          <p>Zoekt ongeldige e-mailadressen, dubbele rijen en verschillende schrijfwijzen van dezelfde bedrijfsnaam in CSV- en Excel-bestanden, en past alleen aan wat de gebruiker goedkeurt.</p>
           <p class="stack">Python · openpyxl · optioneel een lokaal of gehost taalmodel</p>
           <ul class="links">
             <li><a href="/projecten/datakwaliteit/">Lees de casestudy →</a></li>
@@ -104,13 +104,13 @@
         <li>
           <p class="tag">Kleiner project</p>
           <h2>AI Code Review</h2>
-          <p>Een opdrachtregeltool die een Python-bestand door de Claude API laat beoordelen. De bevindingen verschijnen één voor één, met een voorgestelde oplossing en het regelnummer.</p>
+          <p>Een command-linetool die een Python-bestand laat beoordelen door de Claude API. De bevindingen verschijnen één voor één, met een voorgestelde oplossing en het regelnummer.</p>
           <p class="stack">Python · Claude API · streaming · tool use · prompt caching</p>
           <dl class="ledger">
             <dt>Gemeten</dt>
-            <dd>11 geautomatiseerde tests met een nagebootste API. Bij een controle vanaf een verse kloon bleek de installatiestap niet te werken; dat is opgelost.</dd>
-            <dt>Nog niet</dt>
-            <dd>Nog niet tegen de echte Claude API gedraaid, omdat ik daar nog geen sleutel voor heb. Het voorbeeld in de repo is vooraf gegenereerd.</dd>
+            <dd>11 automatische tests met een nagebootste (gemockte) API. Toen ik het project vanaf een verse kloon opnieuw opzette, werkte de installatiestap niet. Dat is opgelost.</dd>
+            <dt>Nog niet gedaan</dt>
+            <dd>Nog niet gedraaid tegen de echte Claude API, omdat ik daar nog geen sleutel voor heb. Het voorbeeld in de repo is vooraf gegenereerd.</dd>
           </dl>
           <ul class="links">
             <li><a href="https://github.com/Ms-8888/ms-ai-review" rel="noopener noreferrer">Code ↗</a></li>
@@ -120,13 +120,13 @@
         <li>
           <p class="tag">Kleiner project</p>
           <h2>Codebase-analist</h2>
-          <p>Een agent die een map met code onderzoekt via een paar hulpmiddelen (lijst, lezen, zoeken), een vraag beantwoordt met verwijzingen naar bestanden, en daarna zijn eigen antwoord beoordeelt.</p>
+          <p>Een agent die een codemap uitpluist met een paar tools (bestanden opsommen, lezen, zoeken), een vraag beantwoordt met verwijzingen naar bestanden en daarna zijn eigen antwoord beoordeelt.</p>
           <p class="stack">Python · Claude API · ReAct-patroon · tool use</p>
           <dl class="ledger">
             <dt>Gemeten</dt>
-            <dd>10 geautomatiseerde tests voor de hulpmiddelen, inclusief de bescherming tegen paden buiten de doelmap.</dd>
-            <dt>Nog niet</dt>
-            <dd>De agentlus zelf is niet automatisch getest en nog niet tegen de echte API gedraaid. De score die de agent zichzelf geeft is een eigen oordeel, geen meting.</dd>
+            <dd>10 automatische tests voor de tools, inclusief de bescherming tegen paden buiten de doelmap.</dd>
+            <dt>Nog niet gedaan</dt>
+            <dd>De agentlus zelf heb ik niet automatisch getest en ook nog niet gedraaid tegen de echte API. De score die de agent zichzelf geeft is een eigen oordeel, geen meting.</dd>
           </dl>
           <ul class="links">
             <li><a href="https://github.com/Ms-8888/ms-agent" rel="noopener noreferrer">Code ↗</a></li>
@@ -136,11 +136,11 @@
         <li>
           <p class="tag">Privé</p>
           <h2>Telegram-signaalplatform</h2>
-          <p>Een multi-tenant platform dat signalen naar meerdere Telegram-bots verdeelt, met wachtrij, abonnementen en een React-dashboard. De code is niet publiek; ik leg het graag uit in een gesprek.</p>
+          <p>Een multi-tenant platform dat signalen naar meerdere Telegram-bots verdeelt, met wachtrij, abonnementen en een React-dashboard. De code is niet publiek, maar ik leg het graag uit in een gesprek.</p>
           <p class="stack">Python · PostgreSQL · Redis · React</p>
           <dl class="ledger">
-            <dt>Nog niet</dt>
-            <dd>Geen geautomatiseerde tests en betalingen nog niet gekoppeld. Dat maakt het een leerproject, geen product.</dd>
+            <dt>Nog niet gedaan</dt>
+            <dd>Geen automatische tests en de betalingen zijn nog niet gekoppeld. Het is dus een leerproject, geen product.</dd>
           </dl>
         </li>
       </ol>
@@ -149,7 +149,7 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <span>© 2026 Mohannad Shafik · Turnhout</span>
+      <span>© 2026 Mohannad Shafik · MS Portfolio · Turnhout</span>
       <span><a href="mailto:mohannadshafik@msportfolio.be">mohannadshafik@msportfolio.be</a></span>
     </div>
   </footer>

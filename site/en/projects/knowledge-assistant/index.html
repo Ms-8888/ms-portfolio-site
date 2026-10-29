@@ -121,7 +121,7 @@
           </dl>
 
           <div class="story">
-            <p><strong>The first measurement looked perfect and was wrong.</strong> The local model first scored 28 out of 28. When I read the raw answers, the model had written "Niet_gevonden" and "NIEGT_GEVONDEN" instead of the agreed word. My code only accepted the exact spelling, so those refusals reached the user as an ordinary answer. And my own check looked for the word "niet" (not), which is also in that refusal. I made the code recognise what a refusal is (with tests) and made the check stricter. The local result got worse (27 instead of 28) but more honest. The first run is still in the repo.</p>
+            <p><strong>The first measurement looked perfect and was wrong.</strong> The local model first scored 28 out of 28. When I read the raw answers, the model had written "Niet_gevonden" and "NIEGT_GEVONDEN" instead of the agreed word. My code only accepted the exact spelling, so those refusals reached the user as an ordinary answer. My own check also let such a garbled refusal through. I made the code recognise what a refusal is (with tests) and made the check stricter. The local result got worse (27 instead of 28) but more honest. The first run is still in the repo.</p>
           </div>
           <div class="story">
             <p><strong>Then I had four independent AI reviewers review the project</strong> (security, claims, code quality, recruiter). They found real bugs, such as deleted documents that still produced answers and visitors behind nginx sharing one rate limit. For each bug I first wrote a failing test and then the fix. All nine problems I reproduced this way turned out to be real.</p>
@@ -137,7 +137,7 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <span>© 2026 Mohannad Shafik · Turnhout</span>
+      <span>© 2026 Mohannad Shafik · MS Portfolio · Turnhout</span>
       <span><a href="mailto:mohannadshafik@msportfolio.be">mohannadshafik@msportfolio.be</a></span>
     </div>
   </footer>

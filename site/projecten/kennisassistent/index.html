@@ -69,18 +69,18 @@
       <div class="case">
         <h2>Probleem</h2>
         <div>
-          <p>Medewerkers stellen steeds dezelfde vragen over vakantie, onkosten en IT-regels, en de antwoorden staan in handboeken die niemand doorzoekt. Zoeken op trefwoord herkent andere formuleringen niet ("verlofdagen" tegenover "vakantiedagen"). Een chatbot die uit het hoofd antwoordt, verzint beleid.</p>
-          <p>Wat nodig is: een antwoord dat uit de eigen documenten komt, met de bron erbij, en een duidelijke weigering als de documenten zwijgen.</p>
+          <p>Medewerkers stellen steeds dezelfde vragen over vakantie, onkosten en IT-regels, en de antwoorden staan in handboeken die niemand doorzoekt. Zoeken op trefwoorden herkent een andere formulering niet ("verlofdagen" tegenover "vakantiedagen"). Een chatbot die gewoon uit zijn hoofd antwoordt, verzint beleid.</p>
+          <p>Wat je nodig hebt: een antwoord uit de eigen documenten, met de bron erbij, en een duidelijk "dat weet ik niet" als de documenten erover zwijgen.</p>
         </div>
 
         <h2>Wat ik gebouwd heb</h2>
         <div>
           <ul>
-            <li>Inlezen van Markdown-, PDF- en DOCX-bestanden, opdelen in passages en bewaren met een vectorrepresentatie in PostgreSQL (pgvector).</li>
-            <li>De vectoren worden lokaal berekend met een meertalig model (geen sleutel, geen account), dus zoeken werkt altijd, ook zonder taalmodel.</li>
-            <li>Drie manieren om het antwoord te geven: alleen de meest relevante passage tonen, een lokaal model (Ollama), of Claude. Elk antwoord toont zijn bronnen met bestand, sectie en score.</li>
-            <li>Een beheerweergave met alle gestelde vragen, waarin onbeantwoorde en onzekere vragen te filteren zijn, zodat de eigenaars van de documenten zien wat er ontbreekt.</li>
-            <li>Beveiliging: geen uploadfunctie, vraaglengte en aantal aanvragen per bezoeker beperkt, beheersleutel vergeleken in constante tijd, dagelijks plafond en noodschakelaar voor betaalde modelaanroepen, API-container draait niet als root.</li>
+            <li>Markdown-, PDF- en DOCX-bestanden inlezen, opdelen in passages en bewaren met een embedding (een numerieke weergave van de betekenis) in PostgreSQL (pgvector).</li>
+            <li>De embeddings worden lokaal berekend met een meertalig model (geen sleutel, geen account), dus het zoeken werkt altijd, ook zonder taalmodel.</li>
+            <li>Drie manieren om te antwoorden: alleen de meest relevante passage tonen, een lokaal model (Ollama) of Claude. Bij elk antwoord staan de bronnen met bestand, sectie en score.</li>
+            <li>Een beheerpagina met alle gestelde vragen, waarop je onbeantwoorde en onzekere vragen kunt filteren, zodat de eigenaars van de documenten zien wat er ontbreekt.</li>
+            <li>Beveiliging: geen uploadfunctie, een maximale vraaglengte en een beperkt aantal aanvragen per bezoeker, beheersleutel vergeleken in constante tijd, een dagelijks plafond en een noodschakelaar voor betaalde modelaanroepen, en de API-container draait niet als root.</li>
           </ul>
         </div>
 
@@ -88,17 +88,17 @@
         <div>
           <ol class="flow">
             <li><strong>Documenten inlezen</strong><small>opdelen op kopjes en lengte (max. 800 tekens)</small></li>
-            <li><strong>Vectoren berekenen</strong><small>lokaal, 384 getallen per passage, opgeslagen in pgvector</small></li>
-            <li><strong>Vraag stellen</strong><small>de vraag krijgt dezelfde vectorrepresentatie</small></li>
-            <li><strong>De vier meest verwante passages</strong><small>onder een drempel van 0,28 volgt direct "ik weet het niet"</small></li>
+            <li><strong>Embeddings berekenen</strong><small>lokaal, 384 getallen per passage, opgeslagen in pgvector</small></li>
+            <li><strong>Vraag stellen</strong><small>de vraag wordt op dezelfde manier omgezet in een embedding</small></li>
+            <li><strong>Vier meest verwante passages ophalen</strong><small>scoort de beste onder de drempel van 0,28, dan volgt meteen "ik weet het niet"</small></li>
             <li><strong>Antwoord</strong><small>zonder model: de beste passage; met model: een kort antwoord of "niet gevonden"</small></li>
-            <li><strong>Bronnen en logboek</strong><small>de passages worden getoond, de vraag wordt bewaard voor de beheerweergave</small></li>
+            <li><strong>Bronnen en logboek</strong><small>de passages worden getoond, de vraag wordt bewaard voor de beheerpagina</small></li>
           </ol>
         </div>
 
         <h2>Resultaat</h2>
         <div>
-          <p>Ik schreef 38 testvragen en liet ze automatisch nakijken: staat het juiste document bovenaan, en staat het verwachte feit in het antwoord? De drempel van 0,28 heb ik bepaald met een aparte test van 10 vragen, niet met deze 38.</p>
+          <p>Ik schreef 38 testvragen en liet ze automatisch nakijken: staat het juiste document bovenaan en staat het verwachte feit in het antwoord? De drempel van 0,28 bepaalde ik met een aparte test van 10 vragen, niet met deze 38.</p>
           <table class="figures">
             <caption>Eigen testset van 38 vragen over 5 verzonnen documenten</caption>
             <thead>
@@ -106,25 +106,25 @@
             </thead>
             <tbody>
               <tr><th scope="row">Juist feit in antwoord (28 vragen)</th><td>27</td><td>27</td><td>28</td></tr>
-              <tr><th scope="row">Vragen buiten het onderwerp geweigerd (4)</th><td>4</td><td>4</td><td>4</td></tr>
-              <tr><th scope="row">Juist onderwerp, maar niet in de documenten: geweigerd (4)</th><td>0</td><td>4</td><td>4</td></tr>
+              <tr><th scope="row">Vragen over een ander onderwerp geweigerd (4)</th><td>4</td><td>4</td><td>4</td></tr>
+              <tr><th scope="row">Juist onderwerp, maar antwoord niet in de documenten: geweigerd (4)</th><td>0</td><td>4</td><td>4</td></tr>
               <tr><th scope="row">Tijd per vraag</th><td>2 s</td><td>3 s</td><td>10 s</td></tr>
             </tbody>
           </table>
-          <p>Twee vragen over prompt-injectie (een vraag die het model probeert te misleiden) staan niet in deze tabel. Het juiste document stond bij 28 van de 28 vragen in de top 4, in alle drie de modi. * Claude liep via mijn eigen Claude Code-aanmelding, niet via de API.</p>
+          <p>Twee vragen over prompt injection (een vraag die het model probeert te misleiden) staan niet in deze tabel. Bij 28 van de 28 vragen stond het juiste document in de top 4, in alle drie de modi. * Claude liep via mijn eigen Claude Code-aanmelding, niet via de API.</p>
 
           <dl class="ledger">
             <dt>Wat dit zegt</dt>
-            <dd>Zonder taalmodel werkt "ik weet het niet" alleen voor vragen over een heel ander onderwerp. Vragen over het juiste onderwerp maar zonder antwoord scoorden 0,33 tot 0,54, en drie van de vier hoger dan de laagst scorende echte vraag (0,42). Geen drempel kan ze dus scheiden. Daarvoor is een model nodig.</dd>
-            <dt>Nog niet</dt>
-            <dd>De API-modus met Claude is nog niet getest. Niet getest met echte bedrijfsdocumenten of onder belasting. De testset is klein en door mezelf geschreven, dus dit is een rooktest, geen benchmark.</dd>
+            <dd>Zonder taalmodel werkt "ik weet het niet" alleen bij vragen over een heel ander onderwerp. Vragen over het juiste onderwerp zonder antwoord in de documenten scoorden 0,33 tot 0,54, en drie van de vier scoorden hoger dan de laagst scorende echte vraag (0,42). Met een drempel alleen krijg je die dus niet gescheiden. Daar heb je een model voor nodig.</dd>
+            <dt>Nog niet gedaan</dt>
+            <dd>De API-modus met Claude is nog niet getest. Ik heb ook niet getest met echte bedrijfsdocumenten of onder belasting. De testset is klein en door mezelf geschreven, dus dit is een eerste indicatie, geen benchmark.</dd>
           </dl>
 
           <div class="story">
-            <p><strong>De eerste meting zag er perfect uit en klopte niet.</strong> Het lokale model scoorde eerst 28 van 28. Toen ik de ruwe antwoorden las, bleek het model "Niet_gevonden" en "NIEGT_GEVONDEN" te hebben geschreven in plaats van het afgesproken woord. Mijn code accepteerde alleen de exacte schrijfwijze, dus die weigeringen kwamen als gewoon antwoord bij de gebruiker. En mijn eigen controle zocht naar het woord "niet", dat ook in die weigering zit. Ik heb de code laten herkennen wat een weigering is (met tests) en de controle strenger gemaakt. Het lokale resultaat werd daardoor slechter (27 in plaats van 28) maar eerlijker. De eerste run staat nog in de repo.</p>
+            <p><strong>De eerste meting zag er perfect uit en klopte niet.</strong> Het lokale model scoorde eerst 28 van 28. Toen ik de ruwe antwoorden las, bleek het model "Niet_gevonden" en "NIEGT_GEVONDEN" te hebben geschreven in plaats van het afgesproken woord. Mijn code accepteerde alleen de exacte schrijfwijze, dus die weigeringen kwamen als gewoon antwoord bij de gebruiker terecht. Mijn eigen controle liet zo'n verminkte weigering bovendien ten onrechte door. Ik heb de code laten herkennen wat een weigering is (met tests) en de controle strenger gemaakt. Het lokale resultaat werd daardoor slechter (27 in plaats van 28), maar eerlijker. De eerste run staat nog in de repo.</p>
           </div>
           <div class="story">
-            <p><strong>Daarna liet ik vier onafhankelijke AI-reviewers het project nakijken</strong> (beveiliging, claims, codekwaliteit, recruiter). Ze vonden echte fouten, zoals verwijderde documenten die nog antwoord gaven en bezoekers die achter nginx dezelfde snelheidslimiet deelden. Bij elke fout schreef ik eerst een test die faalde en daarna de oplossing. Alle negen problemen die ik zo nabootste, bleken echt.</p>
+            <p><strong>Daarna liet ik vier onafhankelijke AI-reviewers het project nakijken</strong> (beveiliging, claims, codekwaliteit en de indruk van een recruiter). Ze vonden echte fouten, zoals verwijderde documenten die nog antwoorden gaven en bezoekers die achter nginx dezelfde limiet op het aantal aanvragen deelden. Bij elke fout schreef ik eerst een test die faalde en pas daarna de oplossing. Alle negen problemen die ik zo nabootste, bleken echt te bestaan.</p>
           </div>
 
           <ul class="links">
@@ -137,7 +137,7 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <span>© 2026 Mohannad Shafik · Turnhout</span>
+      <span>© 2026 Mohannad Shafik · MS Portfolio · Turnhout</span>
       <span><a href="mailto:mohannadshafik@msportfolio.be">mohannadshafik@msportfolio.be</a></span>
     </div>
   </footer>
