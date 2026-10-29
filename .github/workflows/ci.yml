@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  check-site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Serve the site and run the link and tag checker
+        run: |
+          python3 -m http.server 8765 --directory site >/dev/null 2>&1 &
+          sleep 2
+          python3 scripts/check_site.py http://localhost:8765
