@@ -9,7 +9,7 @@ Commands (run with the project's venv: .venv\\Scripts\\python scripts\\deploy.py
     list [remote_dir]     read-only: names in a remote directory (to find the web root)
     backup [remote_dir]   read-only: download a remote folder (default <root>/project2) into backup/
     deploy                dry run: show what would be uploaded where (no upload)
-    deploy --yes          upload every file in site/ to the root, then compare sizes
+    deploy --yes          stamp style.css?v=<hash> into every page, upload every file in site/ to the root, then compare sizes
     htaccess --yes        upload extras/htaccess.txt as <root>/.htaccess, re-check the live pages and remove the
                           file again if any page stops answering
     remove-old --yes      delete <root>/project2 ONLY (the retired old site), after checking that its file
@@ -23,6 +23,7 @@ import argparse
 import hashlib
 import base64
 import posixpath
+import re
 import stat
 import sys
 import time
@@ -56,6 +57,25 @@ def local_files() -> list[Path]:
     if problems:
         sys.exit("refusing: files that must not go online: " + ", ".join(str(p.relative_to(SITE)) for p in problems))
     return files
+
+
+CSS_LINK = re.compile(rb'href="/css/style\.css(?:\?v=[0-9a-f]+)?"')
+
+
+def stamp_css_version(write: bool) -> list[str]:
+    """Point every page at style.css?v=<hash of the file>, so browsers drop a cached old stylesheet.
+    Returns the pages that are out of date; rewrites them only when write is True."""
+    version = hashlib.sha1((SITE / "css" / "style.css").read_bytes()).hexdigest()[:8].encode()
+    link = b'href="/css/style.css?v=' + version + b'"'
+    stale = []
+    for page in sorted(SITE.rglob("*.html")):
+        old = page.read_bytes()
+        new = CSS_LINK.sub(link, old)
+        if new != old:
+            stale.append(page.relative_to(SITE).as_posix())
+            if write:
+                page.write_bytes(new)
+    return stale
 
 
 def connect(args) -> paramiko.SFTPClient:
@@ -144,6 +164,9 @@ def ensure_dir(sftp, path: str):
 
 def cmd_deploy(args):
     files = local_files()
+    stale = stamp_css_version(write=args.yes)
+    if stale:
+        print(f"stylesheet version {'updated' if args.yes else 'out of date'} in {len(stale)} pages")
     sftp = connect(args)
     root = remote_root(args, sftp)
     print(f"target root: {root}")
