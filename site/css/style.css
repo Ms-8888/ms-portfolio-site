@@ -462,7 +462,7 @@ code {
 .case {
   display: grid;
   gap: 0 4rem;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   padding-block: 1.5rem 3rem;
 }
 @media (min-width: 52rem) {
@@ -809,6 +809,6 @@ code { border-radius: 4px; }
 
 html { scrollbar-gutter: stable; }
 
-.shot { margin: 0; }
-.shot img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 6px; }
+.shot { margin: 0; min-width: 0; max-width: 100%; }
+.shot img { display: block; width: 100%; max-width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 6px; }
 .shot figcaption { margin-top: .5rem; font-size: .9rem; color: var(--muted); }
