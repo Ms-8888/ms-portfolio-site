@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Projects — Mohannad Shafik</title>
-  <meta name="description" content="Six projects by Mohannad Shafik, five with open code and one private: what each does, what was measured and what has not been done yet.">
+  <meta name="description" content="Six projects by Mohannad Shafik, five with open code and one private: what each does, what I observed and what the limitations are.">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -20,7 +20,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Mohannad Shafik">
   <meta property="og:title" content="Projects — Mohannad Shafik">
-  <meta property="og:description" content="Six projects by Mohannad Shafik, five with open code and one private: what each does, what was measured and what has not been done yet.">
+  <meta property="og:description" content="Six projects by Mohannad Shafik, five with open code and one private: what each does, what I observed and what the limitations are.">
   <meta property="og:url" content="https://msportfolio.be/en/projects/">
   <meta property="og:locale" content="en_GB">
   <meta property="og:locale:alternate" content="nl_BE">
@@ -32,7 +32,7 @@
   <meta property="og:image:alt" content="Mohannad Shafik, Full-Stack Developer — AI &amp; Automation (portrait and name on a teal background)">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Projects — Mohannad Shafik">
-  <meta name="twitter:description" content="Six projects by Mohannad Shafik, five with open code and one private: what each does, what was measured and what has not been done yet.">
+  <meta name="twitter:description" content="Six projects by Mohannad Shafik, five with open code and one private: what each does, what I observed and what the limitations are.">
   <meta name="twitter:image" content="https://msportfolio.be/img/og-image-v3.jpg">
   <meta name="twitter:image:alt" content="Mohannad Shafik, Full-Stack Developer — AI &amp; Automation">
   <!-- /seo -->
@@ -61,7 +61,7 @@
       <div class="wrap">
         <p class="kicker">Projects</p>
         <h1>What I've built</h1>
-        <p class="lede">Six projects: five with open code (in six repos) and one private. Each says what I haven't done yet, and most also what I measured.</p>
+        <p class="lede">Six projects: five with open code (in six repos) and one private. Each lists its limitations, and most also what I observed.</p>
       </div>
     </div>
 
@@ -109,9 +109,9 @@
           <p>A command-line tool that has the Claude API review a Python file. Findings appear one by one, each with a suggested fix and the line number.</p>
           <p class="stack">Python · Claude API · streaming · tool use · prompt caching</p>
           <dl class="ledger">
-            <dt>Measured</dt>
+            <dt>Observations</dt>
             <dd>11 automated tests with a mocked API. A check from a fresh clone showed the install step didn't work; that is fixed.</dd>
-            <dt>Not yet</dt>
+            <dt>Limitations</dt>
             <dd>Not yet tested against the real Claude API, because I don't have a key for it yet. The example in the repo was generated beforehand.</dd>
           </dl>
           <ul class="links">
@@ -125,9 +125,9 @@
           <p>An agent that explores a folder of code with a few tools (list, read, search), answers a question with references to files, and then reviews its own answer.</p>
           <p class="stack">Python · Claude API · ReAct pattern · tool use</p>
           <dl class="ledger">
-            <dt>Measured</dt>
+            <dt>Observations</dt>
             <dd>10 automated tests for the tools, including the protection against paths outside the target folder.</dd>
-            <dt>Not yet</dt>
+            <dt>Limitations</dt>
             <dd>The agent loop itself is not automatically tested and has not been tested against the real API. The score the agent gives itself is its own judgement, not a measurement.</dd>
           </dl>
           <ul class="links">
@@ -141,7 +141,7 @@
           <p>A multi-tenant platform that distributes signals to multiple Telegram bots, with a queue, subscriptions and a React dashboard. The code is not public; I'm happy to walk through it in a conversation.</p>
           <p class="stack">Python · PostgreSQL · Redis · React</p>
           <dl class="ledger">
-            <dt>Not yet</dt>
+            <dt>Limitations</dt>
             <dd>No automated tests and payments not yet connected. That makes it a learning project, not a product.</dd>
           </dl>
         </li>
@@ -152,7 +152,7 @@
   <footer class="site-footer">
     <div class="wrap">
       <span>© 2026 Mohannad Shafik · MS Portfolio · Turnhout</span>
-      <span><a href="mailto:mohannadshafik@msportfolio.be">mohannadshafik@msportfolio.be</a></span>
+      <span><a href="mailto:mohannadshafik@msportfolio.be">mohannadshafik@msportfolio.be</a> · <a href="https://github.com/Ms-8888" rel="noopener noreferrer">GitHub</a> · <a href="https://www.linkedin.com/in/mohannad-shafik/" rel="noopener noreferrer">LinkedIn</a></span>
     </div>
   </footer>
 </body>

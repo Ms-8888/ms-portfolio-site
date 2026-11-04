@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Webhook platform — Mohannad Shafik</title>
-  <meta name="description" content="Case study: a webhook platform with signed delivery, automatic retries and a dashboard. What was measured and what wasn't.">
+  <meta name="description" content="Case study: a webhook platform with signed delivery, automatic retries and a dashboard. What I observed and what I haven't.">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -20,7 +20,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Mohannad Shafik">
   <meta property="og:title" content="Webhook platform — Mohannad Shafik">
-  <meta property="og:description" content="Case study: a webhook platform with signed delivery, automatic retries and a dashboard. What was measured and what wasn&#x27;t.">
+  <meta property="og:description" content="Case study: a webhook platform with signed delivery, automatic retries and a dashboard. What I observed and what I haven&#x27;t.">
   <meta property="og:url" content="https://msportfolio.be/en/projects/webhook-platform/">
   <meta property="og:locale" content="en_GB">
   <meta property="og:locale:alternate" content="nl_BE">
@@ -32,7 +32,7 @@
   <meta property="og:image:alt" content="Mohannad Shafik, Full-Stack Developer — AI &amp; Automation (portrait and name on a teal background)">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Webhook platform — Mohannad Shafik">
-  <meta name="twitter:description" content="Case study: a webhook platform with signed delivery, automatic retries and a dashboard. What was measured and what wasn&#x27;t.">
+  <meta name="twitter:description" content="Case study: a webhook platform with signed delivery, automatic retries and a dashboard. What I observed and what I haven&#x27;t.">
   <meta name="twitter:image" content="https://msportfolio.be/img/og-image-v3.jpg">
   <meta name="twitter:image:alt" content="Mohannad Shafik, Full-Stack Developer — AI &amp; Automation">
   <!-- /seo -->
@@ -108,9 +108,9 @@
         <h2>Result</h2>
         <div>
           <dl class="ledger">
-            <dt>Measured</dt>
+            <dt>Observations</dt>
             <dd>On a local Docker setup: an event was sent to a receiver that failed the first attempt. The second attempt arrived after about 60 seconds and the delivery then showed as succeeded, with two attempts. 10 automated tests and green CI.</dd>
-            <dt>Not yet</dt>
+            <dt>Limitations</dt>
             <dd>No load test, so I don't know how many events per second this can handle. The background process runs inside the same application, not as a separate service. The demo runs on free hosting, so the first request can take half a minute.</dd>
           </dl>
           <div class="story">
@@ -129,7 +129,7 @@
   <footer class="site-footer">
     <div class="wrap">
       <span>© 2026 Mohannad Shafik · MS Portfolio · Turnhout</span>
-      <span><a href="mailto:mohannadshafik@msportfolio.be">mohannadshafik@msportfolio.be</a></span>
+      <span><a href="mailto:mohannadshafik@msportfolio.be">mohannadshafik@msportfolio.be</a> · <a href="https://github.com/Ms-8888" rel="noopener noreferrer">GitHub</a> · <a href="https://www.linkedin.com/in/mohannad-shafik/" rel="noopener noreferrer">LinkedIn</a></span>
     </div>
   </footer>
 </body>

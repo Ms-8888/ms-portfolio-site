@@ -21,4 +21,4 @@ Measured with Lighthouse 12.6.1 against the live site (home pages and a case stu
 
 ## Content rule
 
-Every text change is made in both languages (`site/...` and `site/en/...`). Each project says what was measured and what has not been done yet.
+Every text change is made in both languages (`site/...` and `site/en/...`). Each project says what was observed and what its limitations are.
