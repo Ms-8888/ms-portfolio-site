@@ -69,6 +69,7 @@
       <div class="case">
         <h2>In short</h2>
         <div>
+          <p><strong>What that means for you:</strong> code that comes with tests, someone who can explain what it does, and honest notes on what hasn't been tested yet.</p>
           <p>I use Claude Code as a tool to write, research and tidy up code faster. I treat what the assistant produces as a first draft: I read it, run it and test it. I decide what goes into the code and I can explain what it does.</p>
           <p>The reason is simple: an assistant writes fluently and convincingly, even when something is wrong. Without checking, you quickly get more code, but also more mistakes nobody sees.</p>
         </div>
@@ -79,21 +80,21 @@
             <li><strong>Goal and limits first</strong><small>what it should do, and what it deliberately shouldn't</small></li>
             <li><strong>Build in small steps</strong><small>with the assistant, every step read and run</small></li>
             <li><strong>A failing test first</strong><small>only then the fix, so I'm sure the bug was real</small></li>
-            <li><strong>Standing checks</strong><small>tests, style checks, a scan for secrets and for known vulnerabilities in dependencies</small></li>
+            <li><strong>Standing checks</strong><small>tests, style checks and scans for leaked secrets and vulnerable dependencies</small></li>
             <li><strong>Independent review</strong><small>several AI reviewers, each with a different role: security, claims, code quality, first impression</small></li>
-            <li><strong>Measure and write it down honestly</strong><small>what was measured, and what hasn't been done yet</small></li>
+            <li><strong>Observe and write it down honestly</strong><small>what I observed, and what I haven't yet</small></li>
           </ol>
         </div>
 
         <h2>What it produced</h2>
         <div>
           <dl class="ledger">
-            <dt>Measured</dt>
-            <dd>For the knowledge assistant, all 9 problems I reproduced with a failing test turned out to be real. For the data quality tool it was 19 of 22 (the other 3 tested behaviour that was already correct). Without that check, deleted documents would still have produced answers and approving a proposal could have merged two different companies.</dd>
-            <dt>Not yet</dt>
-            <dd>I haven't worked in a team yet: code review by colleagues, a long maintenance period and agreements with a client are things I haven't experienced. That's what I want to learn first.</dd>
+            <dt>Observations</dt>
+            <dd>A failing test showed every time that the problem was real: 9 of 9 for the knowledge assistant, 19 of 22 for the data quality tool (the other 3 tested behaviour that was already correct). Without that check, deleted documents would still have produced answers and approving a proposal could have merged two different companies.</dd>
+            <dt>Limitations</dt>
+            <dd>I haven't worked in a team yet: code review by colleagues, maintaining a project for years and agreements with a client are the next step.</dd>
           </dl>
-          <p>A worked example is in the <a href="/en/projects/knowledge-assistant/">knowledge assistant case study</a>: a measurement that looked perfect and, on a closer read, wasn't.</p>
+          <p>A worked example is in the <a href="/en/projects/knowledge-assistant/">knowledge assistant case study</a>: a result that looked perfect and, on a closer read, wasn't.</p>
         </div>
       </div>
     </div>
@@ -102,7 +103,7 @@
   <footer class="site-footer">
     <div class="wrap">
       <span>© 2026 Mohannad Shafik · MS Portfolio · Turnhout</span>
-      <span><a href="mailto:mohannadshafik@msportfolio.be">mohannadshafik@msportfolio.be</a></span>
+      <span><a href="mailto:mohannadshafik@msportfolio.be">mohannadshafik@msportfolio.be</a> · <a href="https://github.com/Ms-8888" rel="noopener noreferrer">GitHub</a> · <a href="https://www.linkedin.com/in/mohannad-shafik/" rel="noopener noreferrer">LinkedIn</a></span>
     </div>
   </footer>
 </body>

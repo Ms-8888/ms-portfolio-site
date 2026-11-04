@@ -1,6 +1,6 @@
 # Mohannad Shafik (MS Portfolio)
 
-> Mohannad Shafik is a full-stack developer from Turnhout, Belgium, working on AI and automation. He builds complete systems in Python and TypeScript (API, database, dashboard, Claude API integration) and is looking for a first role as a junior developer. This site (msportfolio.be, also written "MS Portfolio") is his portfolio, in Dutch and English. Each project states what was measured and what has not been done yet.
+> Mohannad Shafik is a full-stack developer from Turnhout, Belgium, working on AI and automation. He builds complete systems in Python and TypeScript (API, database, dashboard, Claude API integration) and is open to projects and collaboration. This site (msportfolio.be, also written "MS Portfolio") is his portfolio, in Dutch and English. Each project states what was observed and what its limitations are.
 
 Contact: mohannadshafik@msportfolio.be · GitHub: https://github.com/Ms-8888 · LinkedIn: https://www.linkedin.com/in/mohannad-shafik/
 
